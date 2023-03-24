@@ -14,9 +14,13 @@
     "@supabase/auth-ui-react": "^0.3.5",
     "@supabase/supabase-js": "^2.12.1",
     "eslint": "8.36.0",
-    "eslint-config-next": "13.2.4",
     "next": "13.2.4",
+    "only": "^0.0.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "server": "^1.0.38"
+  },
+  "devDependencies": {
+    "eslint-config-next": "^13.2.4"
   }
 }

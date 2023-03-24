@@ -20,7 +20,7 @@ const Home = () => {
         <>
         <Account session={session} />
         <button className="button block">
-        <Link href='/page'>Blog</Link>
+        <Link href='/clicker'>Blog</Link>
         </button>
         </>
       )}
