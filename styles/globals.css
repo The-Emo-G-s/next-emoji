@@ -431,3 +431,36 @@ button.primary,
   margin-bottom: 10px;
   text-decoration: none;
 }
+.container-nav{
+  display: flex;
+  justify-content: space-between;
+  height: 8vw;
+  background-color:khaki;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: large;
+  align-items: center;
+}
+.link-home{
+  text-decoration: none;
+ margin-left: 40vw;
+ color: #222;
+
+}
+.login-signup{
+  text-decoration: none;
+  margin-right: 2vw;
+  color: #222;
+}
+
+.container-dept{
+  display: flex;
+  justify-content: space-between;
+  margin: 5vw;
+
+}
+.right{
+  flex: 50%;
+}
+.left{
+  flex: 50%
+}
