@@ -1,21 +1,18 @@
 import { supabase } from './../lib/supabaseClient';
 
-function Clicker({ emojis }) {
+function Clicker({ emotes }) {
     return (
-      <ul>
-        {emojis.map((emoji) => (
-          <li key={emoji.id}><img src={emoji.imageUrl} alt=''/></li>
-        ))}
-      </ul>
+			<div>{emotes[0].name}</div>
+      
     );
   }
 
   export async function getServerSideProps() {
-    let { data } = await supabase.from('emojis').select()
+    let { data } = await supabase.from('emotes').select()
 
     return {
       props: {
-       emojis: data
+       emotes: data
       },
     }
   }
