@@ -12,11 +12,11 @@ const Home = () => {
     <div className='container-home'>
     <Navbar/>
     <div className='container-dept'>
-    <Link href='/earth' className='right'>Earth Em🌏jis</Link>
-    <Link href='/wind' className='right'>Wind Em🌬jis</Link>
-    <Link href='/fire' className='left'>Fire Em🔥jis</Link>
-    <Link href='/water' className='left'>Water Em💦jis</Link>
-    <Link href='/heart' className='left'>Heart Em❤️jis</Link>
+    <div><Link href='/earth' className='right'>Earth Emojis</Link></div>
+    <div><Link href='/wind' className='right'>Wind Emojis</Link></div>
+    <div><Link href='/fire' className='left'>Fire Emojis</Link></div>
+    <div><Link href='/water' className='left'>Water Emojis</Link></div>
+    <div><Link href='/heart' className='left'>Heart Emojis</Link></div>
     </div>
     </div>
     )
