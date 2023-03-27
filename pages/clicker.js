@@ -29,6 +29,10 @@ const Clicker = () => {
     setScore(score + 1);
   };
 
+  const saveScore = () => {
+    // save score to database for active user
+  };
+
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     setScore(score + 1 + idleCount);
@@ -108,9 +112,10 @@ const Clicker = () => {
   {/* <Account session={session} /> */}
   {/* need link account to person profile*/}
   <div className="container-clicker">
-  <h1>Em🔥jis Clicker</h1>
+  <h1>Emojis Clicker</h1>
   <p>Score: {score}</p>
   <button onClick={clicker}>🫧</button>
+  <button onClick={saveScore}>Save Game</button>
   <h2> 🌬 Boost:</h2>
   {upgrades.map((upgrade) => (
     <button key={upgrade.name}
