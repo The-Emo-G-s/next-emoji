@@ -4,6 +4,7 @@ import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Account from '@/components/Account';
 import Link from 'next/link';
 import Navbar from '@/components/ NavBar';
+import Clicker from '@/components/clicker';
 
 
 const Login = () => {
@@ -24,9 +25,7 @@ const Login = () => {
       ) : (
         <>
         <Account session={session} />
-        <button className="button block">
-        <Link href='/page'>Blog</Link>
-        </button>
+      <Clicker/>
         </>
       )}
     </div>
