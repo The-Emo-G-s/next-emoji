@@ -7,7 +7,7 @@ export default function Account({ session }) {
   const user = useUser()
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
+  const [avatar_url, setAvatarUrl] = useState(null)//their emoji
 
   useEffect(() => {
     getProfile()

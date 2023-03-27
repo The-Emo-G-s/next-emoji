@@ -1,27 +1,61 @@
 import { supabase } from '../lib/supabaseClient';
 import Image from 'next/image';
+import { useState } from 'react';
+import Navbar from '@/components/ NavBar';
 
 function Storefront ({ animojis }){
 	// const vouchers = log(sum(user.clicks)) - user.clickers.length;
+	const [list, setList] = useState(animojis);
+	const [filteredByEarth, setFilteredByEarth] = useState(1);
+	const [filteredByFire, setFilteredByFire] = useState(1);
+	const [filteredByWind, setFilteredByWind] = useState(1);
+	const [filteredByWater, setFilteredByWater] = useState(1);
+	const [filteredByHeart, setFilteredByHeart] = useState(1);
 
   return (
 		<>
+			<Navbar/>
 			<div className='wealth-indicator'>
 				{`vouchers > 0 ? vouchers > 1 ? You can afford VOUCHERS clickers right now! : You can afford a clicker right now! : You cannot afford another clicker right now. 😿`}
 			</div>
 			<div className='sort-menu'>Sort by:
 				<p>
-					<span>🪨EARTH🪨</span>
-					<span>🔥FIRE🔥</span>
-					<span>🌬WIND🌬</span>
-					<span>🌊WATER🌊</span>
-					<span>💝HEART💝</span>
+					<button 
+						onClick={()=> {
+							setList(animojis.filter(emoji => emoji.department === "earth"));
+							setFilteredByEarth(true);
+						}}
+					>🪨EARTH🪨</button>
+					<button 
+						onClick={()=> {
+							setList(animojis.filter(emoji => emoji.department === "fire"));
+							setFilteredByFire(true);
+						}}
+					>🔥FIRE🔥</button>
+					<button 
+						onClick={()=> {
+							setList(animojis.filter(emoji => emoji.department === "wind"));
+							setFilteredByWind(true);
+						}}
+					>🌬WIND🌬</button>
+					<button 
+						onClick={()=> {
+							setList(animojis.filter(emoji => emoji.department === "water"));
+							setFilteredByWater(true);
+						}}
+					>🌊WATER🌊</button>
+					<button 
+						onClick={()=> {
+							setList(animojis.filter(emoji => emoji.department === "heart"));
+							setFilteredByHeart(true);
+						}}
+					>💝HEART💝</button>
 				</p>
 			</div>
 			<div className='store'>
-				{animojis.map((emoji) => {
+				{list.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
-						<img key={`product-${emoji.id}`} src={emoji.imageUrl} alt={emoji.name} />
+						<img key={`product-${emoji.name}`} src={emoji.imageUrl} alt={emoji.name} />
 					)
 				})}
 			</div>
@@ -39,20 +73,3 @@ export async function getServerSideProps() {
 }
 
 export default Storefront
-
-/*
-
-<style jsx></style>
-
-const MyImage = (props) => {
-  return (
-    <Image
-      loader={myLoader}
-      src="me.png"
-      alt="Picture of the author"
-      width={500}
-      height={500}
-    />
-  )
-}
-*/
