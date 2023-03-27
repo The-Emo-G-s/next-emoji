@@ -1,25 +1,34 @@
-// import { Auth } from '@supabase/auth-ui-react'
-// import { ThemeSupa } from '@supabase/auth-ui-shared'
-// import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
-// import Account from '@/components/Account';
-// import Link from 'next/link';
+import { Auth } from '@supabase/auth-ui-react'
+import { ThemeSupa } from '@supabase/auth-ui-shared'
 import Navbar from '../components/ NavBar';
 import Link from 'next/link';
+import Account from '@/components/Account';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+
 
 const Home = () => {
+  const session = useSession()
+  const supabase = useSupabaseClient()
 
   return (
-    <div className='container-home'>
-    <Navbar/>
-    <div className='container-dept'>
-    <div><Link href='/earth' className='right'>Earth Emojis</Link></div>
-    <div><Link href='/wind' className='right'>Wind Emojis</Link></div>
-    <div><Link href='/fire' className='left'>Fire Emojis</Link></div>
-    <div><Link href='/water' className='left'>Water Emojis</Link></div>
-    <div><Link href='/heart' className='left'>Heart Emojis</Link></div>
+    <div className="container" style={{ padding: '50px 0 100px 0' }}>
+      <Navbar/>
+      {!session ? (
+        <Auth
+        providers={["github", "google", "twitter"]}
+          supabaseClient={supabase}
+          appearance={{ theme: ThemeSupa }}
+          theme="dark" />
+      ) : (
+        <>
+        <Account session={session} />
+        <button className="button block">
+        <Link href='/clicker'>Your Game </Link>
+        </button>
+        </>
+      )}
     </div>
-    </div>
-    )
-    }
+  )
+}
 
 export default Home;
