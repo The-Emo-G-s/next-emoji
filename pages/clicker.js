@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+import Navbar from "@/components/ NavBar";
 
 const upgrades = [
   { name: "🐌 Boost", description: "+1 point per click", cost: 100 },
@@ -103,6 +104,7 @@ const Clicker = () => {
 
   return (
     <div>
+      <Navbar/>
   {/* <Account session={session} /> */}
   {/* need link account to person profile*/}
   <div className="container-clicker">
