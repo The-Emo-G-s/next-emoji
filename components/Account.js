@@ -2,8 +2,9 @@ import { supabase } from '../lib/supabaseClient';
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Avatar from './Avatar';
+import Storefront from '@/pages/storefront';
 
-function Account({ session, animojis }) {
+function Account({ session, inputs }) {
   const supabase = useSupabaseClient()
   const user = useUser()
   const [loading, setLoading] = useState(true)
@@ -11,6 +12,7 @@ function Account({ session, animojis }) {
   const [avatar_url, setAvatarUrl] = useState(null)//their emoji
 
   useEffect(() => {
+		console.log(inputs)
     getProfile()
   }, [session])
 
@@ -65,7 +67,6 @@ function Account({ session, animojis }) {
   return (
     <div className="form-widget">
         <Avatar
-				animojis={animojis}
         uid={user.id}
         url={avatar_url}
         size={150}
@@ -103,15 +104,17 @@ function Account({ session, animojis }) {
           Sign Out
         </button>
       </div>
+			{/* <Storefront animojis={inputs} /> */}
     </div>
   )
 }
+
 export async function getServerSideProps() {
   let { data } = await supabase.from('emotes').select()
 
   return {
     props: {
-     animojis: data
+     inputs: data
     },
   }
 }

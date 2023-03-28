@@ -15,9 +15,9 @@ function Storefront ({ animojis }){
   return (
 		<>
 			<Navbar/>
-			<div className='wealth-indicator'>
+			{/* <div className='wealth-indicator'>
 				{`vouchers > 0 ? vouchers > 1 ? You can afford VOUCHERS clickers right now! : You can afford a clicker right now! : You cannot afford another clicker right now. 😿`}
-			</div>
+			</div> */}
 			<div className='sort-menu'>Sort by:
 				<p>
 					<button 

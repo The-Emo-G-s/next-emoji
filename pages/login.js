@@ -4,9 +4,11 @@ import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Account from '@/components/Account';
 import Link from 'next/link';
 import Navbar from '@/components/ NavBar';
+import Storefront from './storefront';
+import { supabase } from '../lib/supabaseClient';
 
 
-const Login = () => {
+const Login = ({ animojis }) => {
   const session = useSession()
   const supabase = useSupabaseClient()
 
@@ -26,12 +28,23 @@ const Login = () => {
         <Account session={session} />
         <button className="button block">
         <Link href='/page'>Blog</Link>
+				<Storefront animojis={animojis} />
         </button>
         </>
       )}
     </div>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  let { data } = await supabase.from('emotes').select()
+
+  return {
+    props: {
+    	animojis: data
+    },
+  }
 }
 
 export default Login
