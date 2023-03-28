@@ -2,44 +2,45 @@ import { supabase } from '../lib/supabaseClient';
 import React, { useEffect, useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
-function Avatar({ uid, url, size, onUpload, animojis }) {
+function Avatar({ uid, url, size, onUpload, data }) {
   const supabase = useSupabaseClient()
   const [avatarUrl, setAvatarUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
 
-  useEffect(() => {
-    if (url) downloadImage(url)
-  }, [url])
+  // useEffect(() => {
+  //   if (url) downloadImage(url)
+  // }, [url])
 
-  async function downloadImage(path) {
-    try {
-      const { data, error } = await supabase.storage.from('avatars').download(path)
-      if (error) {
-        throw error
-      }
-      const url = URL.createObjectURL(data)
-      setAvatarUrl(url)
-    } catch (error) {
-      console.log('Error downloading image: ', error)
-    }
-  }
+  // async function downloadImage(path) {
+  //   try {
+  //     const { data, error } = await supabase.storage.from('avatars').download(path)
+  //     if (error) {
+  //       throw error
+  //     }
+  //     const url = URL.createObjectURL(data)
+  //     setAvatarUrl(url)
+  //   } catch (error) {
+  //     console.log('Error downloading image: ', error)
+  //   }
+  // }
 
   const uploadAvatar = async (event) => {
+		console.log(event.target.value)
     try {
       setUploading(true)
 
-      if (!event.target.files || event.target.files.length === 0) {
-        throw new Error('You must select an image to upload.')
+      if (!event.target.value) {
+        throw new Error("Sorry, there appears to be a problem with that selection.")
       }
 
-      const file = event.target.files[0]
-      const fileExt = file.name.split('.').pop()
-      const fileName = `${uid}.${fileExt}`
-      const filePath = `${fileName}`
+      // const file = event.target.files[0]
+      // const fileExt = file.name.split('.').pop()
+      // const fileName = `${uid}.${fileExt}`
+      const filePath = `${event.target.value}`
 
       let { error: uploadError } = await supabase.storage
         .from('avatars')
-        .upload(filePath, file, { upsert: true })
+        .upload(filePath, { upsert: true })
 
       if (uploadError) {
         throw uploadError
@@ -56,9 +57,9 @@ function Avatar({ uid, url, size, onUpload, animojis }) {
 
   return (
     <div>
-      {avatarUrl ? (
+      {url ? (
         <img
-          src={avatarUrl}
+          src={url}
           alt="Avatar"
           className="avatar image"
           style={{ height: size, width: size }}
@@ -71,20 +72,19 @@ function Avatar({ uid, url, size, onUpload, animojis }) {
           {uploading ? 'Uploading ...' : 'Upload'}
         </label>
 				<select
-				defaultValue='Which emoji are you?'
-			>
-				{/* {animojis.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
+					onChange={uploadAvatar}
+				>
+				{/* {data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
 						<option key={`memoji-${emoji.name}`} value={emoji.id}>
 							<img className='mini-img' src={emoji.imageUrl} alt={emoji.name} />
 						</option>
 					)
 				})} */}
-				<option>🐻</option>
-				<option>🐻</option>
-				<option>🐻</option>
-				<option>🐻</option>
-				<option>🐻</option>
+				<option value="https://em-content.zobj.net/thumbs/120/apple/354/bear_1f43b.png">🐻</option>
+				<option value="https://em-content.zobj.net/thumbs/120/google/350/bear_1f43b.png">🐻‍❄️</option>
+				<option value="https://em-content.zobj.net/thumbs/120/microsoft/319/bear_1f43b.png">🧸</option>
+				<option value="https://em-content.zobj.net/thumbs/120/twitter/322/bear_1f43b.png">🐼</option>
 			</select>
         {/* <select
           type="file"
@@ -96,15 +96,6 @@ function Avatar({ uid, url, size, onUpload, animojis }) {
       </div>
     </div>
   )
-}
-export async function getServerSideProps() {
-  let { data } = await supabase.from('emotes').select()
-
-  return {
-    props: {
-     animojis: data
-    },
-  }
 }
 
 export default Avatar;

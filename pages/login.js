@@ -25,10 +25,9 @@ const Login = ({ animojis }) => {
           theme="dark" />
       ) : (
         <>
-        <Account session={session} />
+        <Account session={session} animojis={animojis} />
         <button className="button block">
         <Link href='/clicker'>Your Game</Link>
-				<Storefront animojis={animojis} />
         </button>
         </>
       )}
@@ -38,11 +37,11 @@ const Login = ({ animojis }) => {
 }
 
 export async function getServerSideProps() {
-  let { data } = await supabase.from('emotes').select()
+  let { data } = await supabase.from('animojis').select()
 
   return {
     props: {
-    	animojis: data
+     animojis: data
     },
   }
 }

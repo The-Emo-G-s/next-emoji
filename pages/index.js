@@ -9,7 +9,7 @@ import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useState } from 'react';
 import Storefront from './storefront';
 
-const Home = ({ data }) => {
+const Home = ({ animojis }) => {
 	const session = useSession()
   const supabase = useSupabaseClient()
   return (
@@ -36,7 +36,7 @@ const Home = ({ data }) => {
 			{/* <div className='wealth-indicator'>
 				{`vouchers > 0 ? vouchers > 1 ? You can afford VOUCHERS clickers right now! : You can afford a clicker right now! : You cannot afford another clicker right now. 😿`}
 			</div> */}
-			<Storefront animojis={data}/>
+			<Storefront animojis={animojis}/>
     </div>
   )
 }
@@ -46,7 +46,7 @@ export async function getServerSideProps() {
 
 	return {
 		props: {
-			data: data
+			animojis: data
 		},
 	}
 }

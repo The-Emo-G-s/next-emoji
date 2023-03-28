@@ -4,18 +4,18 @@ import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Avatar from './Avatar';
 import Storefront from '@/pages/storefront';
 
-function Account({ session, inputs }) {
+function Account({ session, animojis }) {
   const supabase = useSupabaseClient()
   const user = useUser()
+	const [data, setData] = useState(animojis);
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
+  const [url, setUrl] = useState(null)
   const [emoji, setEmoji] = useState(null)
   const [points, setPoints] = useState(0)
 
   useEffect(() => {
-		console.log(inputs)
-    getProfile()
+		getProfile();
   }, [session])
 
 async function getCurrentUser() {
@@ -48,7 +48,7 @@ async function getCurrentUser() {
 
       if (data) {
         setUsername(data.username)
-        setAvatarUrl(data.avatar_url)
+        setUrl(data.avatar_url)
         setEmoji(data.emoji)
         setPoints(points)
       }
@@ -84,15 +84,17 @@ async function getCurrentUser() {
 
   return (
     <div className="form-widget">
-        <Avatar
+        {/* <Avatar
         uid={user.id}
-        url={avatar_url}
+        url={avatarUrl}
         size={150}
         onUpload={(url) => {
             setAvatarUrl(url)
             updateProfile({ username, avatar_url: url })
             }}
-        />
+				data={animojis}
+        /> */}
+				<img src={url} />
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -110,7 +112,7 @@ async function getCurrentUser() {
       <div>
         <button
           className="button primary block"
-          onClick={() => updateProfile({ username, avatar_url })}
+          onClick={() => updateProfile({ username, avatar_url: url })}
           disabled={loading}
         >
           {loading ? 'Loading ...' : 'Update'}
@@ -122,19 +124,23 @@ async function getCurrentUser() {
           Sign Out
         </button>
       </div>
-			{/* <Storefront animojis={inputs} /> */}
+			<div className='store'>
+				{data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
+					return (
+						<button 
+							key={`product-${emoji.name}`}
+							onClick={(event)=> {
+								setUrl(event.target.src)
+							}}
+						>
+							<img src={emoji.imageUrl} alt={emoji.name} />
+						</button>	
+					)
+				})}
+			</div>
     </div>
   )
 }
 
-export async function getServerSideProps() {
-  let { data } = await supabase.from('emotes').select()
-
-  return {
-    props: {
-     inputs: data
-    },
-  }
-}
-
 export default Account
+

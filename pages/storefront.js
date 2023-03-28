@@ -1,6 +1,7 @@
 import { supabase } from '../lib/supabaseClient';
 // import Image from 'next/image';
 import { useState } from 'react';
+import Navbar from '@/components/ NavBar';
 
 function Storefront ({ animojis }){
 
@@ -14,6 +15,7 @@ function Storefront ({ animojis }){
 
   return (
 		<>
+			<Navbar />
 			{/* <div className='wealth-indicator'>
 				{`vouchers > 0 ? vouchers > 1 ? You can afford VOUCHERS clickers right now! : You can afford a clicker right now! : You cannot afford another clicker right now. 😿`}
 			</div> */}
@@ -56,10 +58,8 @@ function Storefront ({ animojis }){
 					return (
 						<button 
 							key={`product-${emoji.name}`}
-							// value={emoji.imageUrl}
 							onClick={(event)=> {
 								console.log(event.target.src)
-								// console.log(event.target.value)
 							}}
 						>
 							<img src={emoji.imageUrl} alt={emoji.name} />
@@ -70,14 +70,14 @@ function Storefront ({ animojis }){
 		</>
   )
 }
-export async function getServerSideProps() {
-  let { data } = await supabase.from('animojis').select()
+// export async function getServerSideProps() {
+//   let { data } = await supabase.from('animojis').select()
 
-  return {
-    props: {
-     animojis: data
-    },
-  }
-}
+//   return {
+//     props: {
+//      turtlepuff: data
+//     },
+//   }
+// }
 
 export default Storefront
