@@ -9,8 +9,9 @@ import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useState } from 'react';
 import Storefront from './storefront';
 
-const Home = () => {
-
+const Home = ({ data }) => {
+	const session = useSession()
+  const supabase = useSupabaseClient()
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       <Navbar/>
@@ -41,7 +42,7 @@ const Home = () => {
 }
 
 export async function getServerSideProps() {
-	let { data } = await supabase.from('emotes').select()
+	let { data } = await supabase.from('animojis').select()
 
 	return {
 		props: {
