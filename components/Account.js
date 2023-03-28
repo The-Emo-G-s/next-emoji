@@ -7,19 +7,35 @@ export default function Account({ session }) {
   const user = useUser()
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)//their emoji
+  const [avatar_url, setAvatarUrl] = useState(null)
+  const [emoji, setEmoji] = useState(null)
+  const [points, setPoints] = useState(0)
 
   useEffect(() => {
     getProfile()
   }, [session])
 
+async function getCurrentUser() {
+  const{
+    data: { session },
+    error,
+  } = await supabase.auth.getSession()
+  if (error) {
+    throw error
+  }
+  if(!session?.user){
+    throw new Error('you are not logged in')
+  }
+  return session.user
+}
   async function getProfile() {
     try {
       setLoading(true)
+      const user = await getCurrentUser()
 
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, avatar_url`)
+        .select(`*`)
         .eq('id', user.id)
         .single()
 
@@ -30,6 +46,8 @@ export default function Account({ session }) {
       if (data) {
         setUsername(data.username)
         setAvatarUrl(data.avatar_url)
+        setEmoji(data.emoji)
+        setPoints(points)
       }
     } catch (error) {
       alert('Error loading user data!')
@@ -104,3 +122,4 @@ export default function Account({ session }) {
     </div>
   )
 }
+
