@@ -5,12 +5,15 @@ import Account from '@/components/Account';
 import Link from 'next/link';
 import Navbar from '@/components/ NavBar';
 import Storefront from './storefront';
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 import Clicker from '@/pages/clicker';
+import { useRouter } from 'next/router';
 
-const Login = ({ animojis }) => {
+
+const Login = () => {
   const session = useSession()
   const supabase = useSupabaseClient()
+
 
   return (
     <div>
@@ -27,8 +30,8 @@ const Login = ({ animojis }) => {
         <>
         <Account session={session} />
         <button className="button block">
-        <Link href='/clicker'>Your Game</Link>
-				<Storefront animojis={animojis} />
+        <Link href='/click2'>Your Game</Link>
+				{/* <Storefront animojis={animojis} /> */}
         </button>
         </>
       )}
@@ -37,14 +40,14 @@ const Login = ({ animojis }) => {
   )
 }
 
-export async function getServerSideProps() {
-  let { data } = await supabase.from('emotes').select()
+// export async function getServerSideProps() {
+//   let { data } = await supabase.from('animojis').select()
 
-  return {
-    props: {
-    	animojis: data
-    },
-  }
-}
+//   return {
+//     props: {
+//     	animojis: data
+//     },
+//   }
+// }
 
 export default Login

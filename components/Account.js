@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Avatar from './Avatar';
@@ -14,7 +14,6 @@ function Account({ session, inputs }) {
   const [points, setPoints] = useState(0)
 
   useEffect(() => {
-		console.log(inputs)
     getProfile()
   }, [session])
 
@@ -60,7 +59,7 @@ async function getCurrentUser() {
     }
   }
 
-  async function updateProfile({ username, avatar_url }) {
+  async function updateProfile({ username, points, avatar_url }) {
     try {
       setLoading(true)
 
@@ -68,6 +67,7 @@ async function getCurrentUser() {
         id: user.id,
         username,
         avatar_url,
+        points,
         updated_at: new Date().toISOString(),
       }
 
@@ -84,6 +84,7 @@ async function getCurrentUser() {
 
   return (
     <div className="form-widget">
+      <h1>Welcome back, {username}!</h1>
         <Avatar
         uid={user.id}
         url={avatar_url}
@@ -106,11 +107,20 @@ async function getCurrentUser() {
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
+      <div>
+        <label htmlFor="points">Points:</label>
+        <input
+          id="points"
+          type="number"
+          value={points || ''}
+          onChange={(e) => setPoints(e.target.value)}
+        />
+      </div>
 
       <div>
         <button
           className="button primary block"
-          onClick={() => updateProfile({ username, avatar_url })}
+          onClick={() => updateProfile({ username, points, avatar_url })}
           disabled={loading}
         >
           {loading ? 'Loading ...' : 'Update'}
@@ -127,14 +137,14 @@ async function getCurrentUser() {
   )
 }
 
-export async function getServerSideProps() {
-  let { data } = await supabase.from('emotes').select()
+// export async function getServerSideProps() {
+//   let { data } = await supabase.from('animojis').select()
 
-  return {
-    props: {
-     inputs: data
-    },
-  }
-}
+//   return {
+//     props: {
+//      inputs: data
+//     },
+//   }
+// }
 
 export default Account

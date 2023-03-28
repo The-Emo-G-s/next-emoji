@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 // import Image from 'next/image';
 import { useState } from 'react';
 
@@ -19,31 +19,31 @@ function Storefront ({ animojis }){
 			</div> */}
 			<div className='sort-menu'>Sort by:
 				<p>
-					<button 
+					<button
 						onClick={()=> {
 							setList(animojis.filter(emoji => emoji.department === "earth"));
 							setFilteredByEarth(true);
 						}}
 					>🪨EARTH🪨</button>
-					<button 
+					<button
 						onClick={()=> {
 							setList(animojis.filter(emoji => emoji.department === "fire"));
 							setFilteredByFire(true);
 						}}
 					>🔥FIRE🔥</button>
-					<button 
+					<button
 						onClick={()=> {
 							setList(animojis.filter(emoji => emoji.department === "wind"));
 							setFilteredByWind(true);
 						}}
 					>🌬WIND🌬</button>
-					<button 
+					<button
 						onClick={()=> {
 							setList(animojis.filter(emoji => emoji.department === "water"));
 							setFilteredByWater(true);
 						}}
 					>🌊WATER🌊</button>
-					<button 
+					<button
 						onClick={()=> {
 							setList(animojis.filter(emoji => emoji.department === "heart"));
 							setFilteredByHeart(true);
@@ -54,7 +54,7 @@ function Storefront ({ animojis }){
 			<div className='store'>
 				{list.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
-						<button 
+						<button
 							key={`product-${emoji.name}`}
 							// value={emoji.imageUrl}
 							onClick={(event)=> {
@@ -63,7 +63,7 @@ function Storefront ({ animojis }){
 							}}
 						>
 							<img src={emoji.imageUrl} alt={emoji.name} />
-						</button>	
+						</button>
 					)
 				})}
 			</div>

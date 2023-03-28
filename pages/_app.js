@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
 
   return (
-    <SessionContextProvider 
+    <SessionContextProvider
       supabaseClient={supabase}
       initialSession={pageProps.initialSession}>
       <Component {...pageProps} />

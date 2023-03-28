@@ -1,6 +1,6 @@
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 import Navbar from '../components/ NavBar';
 import Link from 'next/link';
 import Account from '@/components/Account';
@@ -25,28 +25,28 @@ const Home = ({ data }) => {
         <>
         <Account session={session} />
         <button className="button block">
-        <Link href='/clicker'>Your Game </Link>
+        <Link href='/click2'>Your Game </Link>
         </button>
 				<button className="button block">
         <Link href='/storefront'>Store </Link>
         </button>
         </>
       )}
-			<Navbar/>
+			{/* <Navbar/> */}
 			{/* <div className='wealth-indicator'>
 				{`vouchers > 0 ? vouchers > 1 ? You can afford VOUCHERS clickers right now! : You can afford a clicker right now! : You cannot afford another clicker right now. 😿`}
 			</div> */}
-			<Storefront animojis={data}/>
+			{/* <Storefront animojis={data}/> */}
     </div>
   )
 }
 
-export async function getServerSideProps() {
-	let { data } = await supabase.from('animojis').select()
+export async function getStaticProps() {
+	let { data: profiles } = await supabase.from('profiles').select('id, username, points')
 
 	return {
 		props: {
-			data: data
+			profiles
 		},
 	}
 }
