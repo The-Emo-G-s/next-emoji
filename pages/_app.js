@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import '../styles/globals.css'
+import Navbar from '@/components/ NavBar'
 
 function MyApp({ Component, pageProps }) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
@@ -28,7 +29,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <SessionContextProvider 
+    <SessionContextProvider
       supabaseClient={supabase}
       initialSession={pageProps.initialSession}>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -46,6 +47,7 @@ function MyApp({ Component, pageProps }) {
         >
           Swap Color Theme
         </button>
+        <Navbar/>
         <Component {...pageProps} />
       </div>
     </SessionContextProvider>

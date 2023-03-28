@@ -5,16 +5,16 @@ import Navbar from '../components/ NavBar';
 import Link from 'next/link';
 import Account from '@/components/Account';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+import Clicker from './click2';
 
 import { useState } from 'react';
 import Storefront from './storefront';
 
-const Home = ({ animojis }) => {
+const Home = () => {
 	const session = useSession()
   const supabase = useSupabaseClient()
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
-      <Navbar/>
       {!session ? (
         <Auth
         providers={["github", "google", "twitter"]}
@@ -23,41 +23,51 @@ const Home = ({ animojis }) => {
           theme="dark" />
       ) : (
         <>
-        <Account session={session} />
-        <button className="button block">
+        {/* <Account session={session} /> */}
+        {/* <button className="button block">
         <Link href='/click2'>Your Game </Link>
-        </button>
+        </button> */}
 				<button className="button block">
-        <Link href='/storefront'>Store </Link>
+        <Link href='/login'>Account </Link>
         </button>
+        <Clicker/>
         </>
       )}
 			{/* <Navbar/> */}
 			{/* <div className='wealth-indicator'>
 				{`vouchers > 0 ? vouchers > 1 ? You can afford VOUCHERS clickers right now! : You can afford a clicker right now! : You cannot afford another clicker right now. 😿`}
 			</div> */}
-			
+
     </div>
   )
 }
 
+// export async function getStaticProps() {
+// 	let { data: profiles } = await supabase.from('profiles').select('id, username, points')
+
+// 	return {
+// 		props: {
+// 			profiles
+// 		},
+// 	}
+// }
 export async function getStaticProps() {
-	let { data: profiles } = await supabase.from('profiles').select('id, username, points')
+	let { data: animojis } = await supabase.from('animojis').select(`*`)
 
 	return {
 		props: {
-			profiles
+			animojis
 		},
 	}
 }
-export async function getServerSideProps() {
-	let { data } = await supabase.from('animojis').select()
+// export async function getServerSideProps() {
+// 	let { data } = await supabase.from('animojis').select()
 
-	return {
-		props: {
-			animojis: data
-		},
-	}
-}
+// 	return {
+// 		props: {
+// 			animojis: data
+// 		},
+// 	}
+// }
 
 export default Home;
