@@ -26,6 +26,9 @@ const Home = () => {
         <button className="button block">
         <Link href='/clicker'>Your Game </Link>
         </button>
+				<button className="button block">
+        <Link href='/storefront'>Store </Link>
+        </button>
         </>
       )}
 			<Navbar/>

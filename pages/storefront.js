@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabaseClient';
 import { useState } from 'react';
 
 function Storefront ({ animojis }){
+
 	// const vouchers = log(sum(user.clicks)) - user.clickers.length;
 	const [list, setList] = useState(animojis);
 	const [filteredByEarth, setFilteredByEarth] = useState(1);
@@ -70,7 +71,7 @@ function Storefront ({ animojis }){
   )
 }
 export async function getServerSideProps() {
-  let { data } = await supabase.from('emotes').select()
+  let { data } = await supabase.from('animojis').select()
 
   return {
     props: {
