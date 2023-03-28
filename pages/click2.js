@@ -58,11 +58,9 @@ async function getCurrentUser() {
       setLoading(false)
     }
   }
-  // const clicker = () => {
-  //   points++
-  // };
 
-  async function updateGame({ avatar_url, username, points }) {
+
+  async function updateGame({ avatar_url, username, points, autoclicks }) {
     try {
       setLoading(true)
       points++
@@ -71,6 +69,7 @@ async function getCurrentUser() {
         id: user.id,
         username,
         avatar_url,
+        autoclicks,
         points,
 
         updated_at: new Date().toISOString(),
