@@ -1,7 +1,6 @@
 import { supabase } from '../lib/supabaseClient';
 // import Image from 'next/image';
 import { useState } from 'react';
-import Navbar from '@/components/ NavBar';
 
 function Storefront ({ animojis }){
 	// const vouchers = log(sum(user.clicks)) - user.clickers.length;
@@ -14,7 +13,6 @@ function Storefront ({ animojis }){
 
   return (
 		<>
-			<Navbar/>
 			{/* <div className='wealth-indicator'>
 				{`vouchers > 0 ? vouchers > 1 ? You can afford VOUCHERS clickers right now! : You can afford a clicker right now! : You cannot afford another clicker right now. 😿`}
 			</div> */}
