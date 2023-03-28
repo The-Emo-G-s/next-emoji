@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabaseClient';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useState } from 'react';
 import Navbar from '@/components/ NavBar';
 
@@ -55,7 +55,16 @@ function Storefront ({ animojis }){
 			<div className='store'>
 				{list.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
-						<img key={`product-${emoji.name}`} src={emoji.imageUrl} alt={emoji.name} />
+						<button 
+							key={`product-${emoji.name}`}
+							// value={emoji.imageUrl}
+							onClick={(event)=> {
+								console.log(event.target.src)
+								// console.log(event.target.value)
+							}}
+						>
+							<img src={emoji.imageUrl} alt={emoji.name} />
+						</button>	
 					)
 				})}
 			</div>

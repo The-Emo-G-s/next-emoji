@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import { supabase } from '../lib/supabaseClient';
+import React, { useEffect, useState } from 'react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
-export default function Avatar({ uid, url, size, onUpload }) {
+function Avatar({ uid, url, size, onUpload, animojis }) {
   const supabase = useSupabaseClient()
   const [avatarUrl, setAvatarUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
@@ -69,18 +70,41 @@ export default function Avatar({ uid, url, size, onUpload }) {
         <label className="button primary block" htmlFor="single">
           {uploading ? 'Uploading ...' : 'Upload'}
         </label>
-        <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
+				<select
+				defaultValue='Which emoji are you?'
+			>
+				{/* {animojis.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
+					return (
+						<option key={`memoji-${emoji.name}`} value={emoji.id}>
+							<img className='mini-img' src={emoji.imageUrl} alt={emoji.name} />
+						</option>
+					)
+				})} */}
+				<option>🐻</option>
+				<option>🐻</option>
+				<option>🐻</option>
+				<option>🐻</option>
+				<option>🐻</option>
+			</select>
+        {/* <select
           type="file"
           id="single"
           accept="image/*"
           onChange={uploadAvatar}
           disabled={uploading}
-        />
+        /> */}
       </div>
     </div>
   )
 }
+export async function getServerSideProps() {
+  let { data } = await supabase.from('emotes').select()
+
+  return {
+    props: {
+     animojis: data
+    },
+  }
+}
+
+export default Avatar;

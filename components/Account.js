@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
-import Avatar from './Avatar'
+import { supabase } from '../lib/supabaseClient';
+import { useState, useEffect } from 'react';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Avatar from './Avatar';
 
-export default function Account({ session }) {
+function Account({ session, animojis }) {
   const supabase = useSupabaseClient()
   const user = useUser()
   const [loading, setLoading] = useState(true)
@@ -29,7 +30,6 @@ export default function Account({ session }) {
 
       if (data) {
         setUsername(data.username)
-        setWebsite(data.website)
         setAvatarUrl(data.avatar_url)
       }
     } catch (error) {
@@ -40,14 +40,13 @@ export default function Account({ session }) {
     }
   }
 
-  async function updateProfile({ username, website, avatar_url }) {
+  async function updateProfile({ username, avatar_url }) {
     try {
       setLoading(true)
 
       const updates = {
         id: user.id,
         username,
-        website,
         avatar_url,
         updated_at: new Date().toISOString(),
       }
@@ -66,6 +65,7 @@ export default function Account({ session }) {
   return (
     <div className="form-widget">
         <Avatar
+				animojis={animojis}
         uid={user.id}
         url={avatar_url}
         size={150}
@@ -106,3 +106,14 @@ export default function Account({ session }) {
     </div>
   )
 }
+export async function getServerSideProps() {
+  let { data } = await supabase.from('emotes').select()
+
+  return {
+    props: {
+     animojis: data
+    },
+  }
+}
+
+export default Account
