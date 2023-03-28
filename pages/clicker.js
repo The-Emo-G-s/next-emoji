@@ -30,7 +30,11 @@ const Clicker = () => {
   };
 
   const saveScore = () => {
-    // save score to database for active user
+    let { data, error } = supabase
+        .from('points')
+        .select(`username, avatar_url, points`)
+        .eq('id', user.id, points)
+        .single()
   };
 
   // useEffect(() => {
