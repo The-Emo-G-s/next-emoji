@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Navbar from '@/components/ NavBar';
 import Storefront from './storefront';
 import { supabase } from '../lib/supabaseClient';
+import Clicker from '@/pages/clicker';
 
 
 const Login = ({ animojis }) => {
@@ -27,7 +28,7 @@ const Login = ({ animojis }) => {
         <>
         <Account session={session} />
         <button className="button block">
-        <Link href='/page'>Blog</Link>
+        <Link href='/clicker'>Your Game</Link>
 				<Storefront animojis={animojis} />
         </button>
         </>

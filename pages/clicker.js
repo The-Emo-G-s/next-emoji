@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
@@ -15,7 +14,7 @@ const upgrades = [
   { name: "🦋 Boost", description: "+1 point per second", cost: 10000 },
 ];
 
-const App = () => {
+const Clicker = () => {
   const session = useSession()
   const supabase = useSupabaseClient()
 
@@ -28,6 +27,10 @@ const App = () => {
 
   const clicker = () => {
     setScore(score + 1);
+  };
+
+  const saveScore = () => {
+    // save score to database for active user
   };
 
   // useEffect(() => {
@@ -102,17 +105,17 @@ const App = () => {
     );
   }, [score, clickerCount, autoCount, idleCount, purchasedUpgrades]);
 
+
   return (
     <div>
-     {session ? (
-  <>
+      <Navbar/>
   {/* <Account session={session} /> */}
   {/* need link account to person profile*/}
   <div className="container-clicker">
-    <Navbar />
-  <h1>Em🔥jis Clicker</h1>
+  <h1>Emojis Clicker</h1>
   <p>Score: {score}</p>
   <button onClick={clicker}>🫧</button>
+  <button onClick={saveScore}>Save Game</button>
   <h2> 🌬 Boost:</h2>
   {upgrades.map((upgrade) => (
     <button key={upgrade.name}
@@ -125,13 +128,10 @@ const App = () => {
   )
 )}
 </div>
-  </>
-) :  (<Auth providers={["github", "google", "twitter"]}
-    supabaseClient={supabase} appearance={{ theme: ThemeSupa }}
-    theme="dark" />)
-    }
+
+
   </div>
   );
 }
 
-export default App;
+export default Clicker;

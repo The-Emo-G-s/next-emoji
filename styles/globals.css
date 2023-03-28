@@ -1,4 +1,4 @@
-html,
+git html,
 body {
   --custom-font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -433,7 +433,7 @@ button.primary,
 }
 .container-nav{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   height: 8vw;
   background-color:khaki;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -442,15 +442,11 @@ button.primary,
 }
 .link-home{
   text-decoration: none;
- margin-left: 40vw;
+
  color: #222;
 
 }
-.login-signup{
-  text-decoration: none;
-  margin-right: 2vw;
-  color: #222;
-}
+
 
 .container-dept{
   display: flex;

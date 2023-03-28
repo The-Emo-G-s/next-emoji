@@ -22,7 +22,7 @@ function Account({ session, inputs }) {
 
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url`)
+        .select(`username, avatar_url`)
         .eq('id', user.id)
         .single()
 
@@ -72,7 +72,7 @@ function Account({ session, inputs }) {
         size={150}
         onUpload={(url) => {
             setAvatarUrl(url)
-            updateProfile({ username, website, avatar_url: url })
+            updateProfile({ username, avatar_url: url })
             }}
         />
       <div>
@@ -92,7 +92,7 @@ function Account({ session, inputs }) {
       <div>
         <button
           className="button primary block"
-          onClick={() => updateProfile({ username, website, avatar_url })}
+          onClick={() => updateProfile({ username, avatar_url })}
           disabled={loading}
         >
           {loading ? 'Loading ...' : 'Update'}
