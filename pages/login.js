@@ -8,7 +8,6 @@ import Storefront from './storefront';
 import { supabase } from '../lib/supabaseClient';
 import Clicker from '@/pages/clicker';
 
-
 const Login = ({ animojis }) => {
   const session = useSession()
   const supabase = useSupabaseClient()
