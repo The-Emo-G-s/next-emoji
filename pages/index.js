@@ -3,7 +3,7 @@ import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { supabase } from '../utils/supabaseClient';
 import Link from 'next/link';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
-import Clicker from './click2';
+import Clicker from './clicker';
 
 
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       {!session ? (
         <Auth
-        providers={["github", "google", "twitter"]}
+        providers={["github", "google", "slack", "discord"]}
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           theme="dark" />
@@ -23,7 +23,7 @@ const Home = () => {
         {/* <button className="button block">
         <Link href='/click2'>Your Game </Link>
         </button> */}
-        <Link href='/login'>
+        <Link href='/account'>
 				<button className="button block">Account</button>
         </Link>
         <Clicker/>
