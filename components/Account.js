@@ -1,6 +1,7 @@
 import { supabase } from '../utils/supabaseClient';
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Link from 'next/link';
 
 function Account({ session, animojis }) {
   const supabase = useSupabaseClient()
@@ -10,12 +11,10 @@ function Account({ session, animojis }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
   const [url, setUrl] = useState(null)
-  const [emoji, setEmoji] = useState(null)
-	const [filtered, setFiltered] = useState(true);
 	const [isFilteredBy, setIsFilteredBy] = useState('');
 
 	const lookupObj = {
-		earth: 'Here is where you can find animals that typically live on the ground! (Trees count as ground)',
+		earth: 'Here is where you can find animals that typically live on the ground! (Trees count as ground.)',
 		fire: "Here is wehre you can find animals that don't currently exist.",
 		wind: "Here is where you can find animals that fly!",
 		water: "Here is where you can find animals that swim!",
@@ -68,7 +67,6 @@ async function getCurrentUser() {
       if (data) {
         setUsername(data.username)
         setUrl(data.avatar_url)
-        setEmoji(data.emoji)
       }
     } catch (error) {
       alert('Error loading user data!')
@@ -132,6 +130,7 @@ async function getCurrentUser() {
         <button className="button block" onClick={() => supabase.auth.signOut()}>
           Sign Out
         </button>
+				<Link href='/clicker'>Your Game</Link>
       </div>
 			<div className='store'>
 				<h1>WHICH EMOJI ARE YOU??</h1>

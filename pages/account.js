@@ -25,7 +25,6 @@ const Login = ({animojis}) => {
         <>
         <Account session={session} animojis={animojis} />
         <button className="button block">
-        <Link href='/clicker'>Your Game</Link>
         </button>
         </>
       )}

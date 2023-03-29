@@ -17,7 +17,7 @@ const upgrades = [
 export default function Clicker ({session}) {
   const supabase = useSupabaseClient()
   const user = useUser()
-  const [points, setPoints] = useState(null);
+  const [points, setPoints] = useState(0);
   const [username, setUsername] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -138,7 +138,7 @@ async function getCurrentUser() {
   return (
     <div>
       <h1>Click Away{username && `, ${username}`}!</h1>
-      <p>Points: {points.toLocaleString('en-US')}</p>
+      <p>Points: {points.toLocaleString("en-US")}</p>
       <button
           onClick={() => updateGame({points})}
           disabled={loading}>
