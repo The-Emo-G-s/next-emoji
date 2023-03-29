@@ -155,3 +155,12 @@ async function getCurrentUser() {
 
 export default Account
 
+export async function getServerSideProps() {
+  let { data } = await supabase.from('animojis').select()
+
+  return {
+    props: {
+     animojis: data
+    },
+  }
+}

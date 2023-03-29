@@ -10,7 +10,7 @@ import Clicker from '@/pages/clicker';
 import { useRouter } from 'next/router';
 
 
-const Login = () => {
+const Login = ({ animojis }) => {
   const session = useSession()
   const supabase = useSupabaseClient()
 
@@ -31,7 +31,6 @@ const Login = () => {
         <Account session={session} animojis={animojis} />
         <button className="button block">
         <Link href='/click2'>Your Game</Link>
-				{/* <Storefront animojis={animojis} /> */}
         </button>
         </>
       )}

@@ -23,7 +23,7 @@ const Home = ({ animojis }) => {
           theme="dark" />
       ) : (
         <>
-        <Account session={session} />
+        {/* <Account session={session} /> */}
         <button className="button block">
         <Link href='/click2'>Your Game </Link>
         </button>
@@ -47,15 +47,6 @@ export async function getStaticProps() {
 	return {
 		props: {
 			profiles
-		},
-	}
-}
-export async function getServerSideProps() {
-	let { data } = await supabase.from('animojis').select()
-
-	return {
-		props: {
-			animojis: data
 		},
 	}
 }
