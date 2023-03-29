@@ -10,14 +10,14 @@ const Login = ({animojis}) => {
   const session = useSession()
   const supabase = useSupabaseClient()
 
-
+  
   return (
     <div>
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
 
       {!session ? (
         <Auth
-        providers={["github", "google", "twitter"]}
+        providers={["google"]}
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           theme="dark" />
@@ -25,7 +25,7 @@ const Login = ({animojis}) => {
         <>
         <Account session={session} animojis={animojis} />
         <button className="button block">
-        <Link href='/click2'>Your Game</Link>
+        <Link href='/clicker'>Your Game</Link>
         </button>
         </>
       )}
