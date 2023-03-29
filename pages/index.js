@@ -26,9 +26,6 @@ const Home = () => {
         <Link href='/login'>
 				<button className="button block">Account</button>
         </Link>
-        <Link href='/test'>
-				<button className="button block">Test</button>
-        </Link>
         <Clicker/>
         </>
       )}
