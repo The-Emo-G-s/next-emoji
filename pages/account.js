@@ -17,7 +17,7 @@ const Login = ({animojis}) => {
 
       {!session ? (
         <Auth
-        providers={["github", "google", "twitter"]}
+        providers={["github", "google", "slack", "discord"]}
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           theme="dark" />
@@ -25,7 +25,7 @@ const Login = ({animojis}) => {
         <>
         <Account session={session} animojis={animojis} />
         <button className="button block">
-        <Link href='/click2'>Your Game</Link>
+        <Link href='/clicker'>Your Game</Link>
         </button>
         </>
       )}
