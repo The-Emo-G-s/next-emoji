@@ -7,11 +7,32 @@ import Storefront from '@/pages/storefront';
 function Account({ session, animojis }) {
   const supabase = useSupabaseClient()
   const user = useUser()
+
 	const [data, setData] = useState(animojis);
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
   const [url, setUrl] = useState(null)
   const [emoji, setEmoji] = useState(null)
+	const [filtered, setFiltered] = useState(true);
+	const [isFilteredBy, setIsFilteredBy] = useState('');
+
+	const lookupObj = {
+		earth: 'Here are animals that typically live on the ground!',
+		fire: "Here are animals that don't currently exist.",
+		wind: "Here are animals that fly!",
+		water: "Here are animals that live in water!",
+		heart: "Here are close-ups or variations of animals found in other categories!"
+	}
+
+	const filterAnimojis = (value)=> {
+		if (isFilteredBy === value) {
+			setData(animojis);
+			setIsFilteredBy('');
+		} else {
+			setIsFilteredBy(value);
+			setData(animojis.filter(emoji => emoji.department === value));
+		}
+	}
 
 
   useEffect(() => {
@@ -84,17 +105,7 @@ async function getCurrentUser() {
   return (
     <div className="form-widget">
       <h1>Welcome back, {username}!</h1>
-        {/* <Avatar
-        uid={user.id}
-        url={avatarUrl}
-        size={150}
-        onUpload={(url) => {
-            setAvatarUrl(url)
-            updateProfile({ username, avatar_url: url })
-            }}
-				data={animojis}
-        /> */}
-				<img src={url} />
+			<img src={url} />
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -125,6 +136,39 @@ async function getCurrentUser() {
         </button>
       </div>
 			<div className='store'>
+				<h1>WHICH EMOJI ARE YOU??</h1>
+				<div className='sort-menu'>Sort by:
+					<p>
+						<button 
+							className={isFilteredBy === 'earth' ? 'active-filter-button' : 'filter-button'}
+							onClick={()=> {filterAnimojis("earth")}} >
+								{isFilteredBy === 'earth' ? '🪨' : '🪨EARTH🪨'}
+						</button>
+						<button 
+							className={isFilteredBy === 'fire' ? 'active-filter-button' : 'filter-button'}
+							onClick={()=> {filterAnimojis("fire")}} >
+								{isFilteredBy === 'fire' ? '🔥' : '🔥FIRE🔥'}
+						</button>
+						<button 
+							className={isFilteredBy === 'wind' ? 'active-filter-button' : 'filter-button'}
+							onClick={()=> {filterAnimojis("wind")}} >
+								{isFilteredBy === 'wind' ? '🌬' : '🌬wind🌬'}
+						</button>
+						<button 
+							className={isFilteredBy === 'water' ? 'active-filter-button' : 'filter-button'}
+							onClick={()=> {filterAnimojis("water")}} >
+								{isFilteredBy === 'water' ? '🌊' : '🌊water🌊'}
+						</button>
+						<button 
+							className={isFilteredBy === 'heart' ? 'active-filter-button' : 'filter-button'}
+							onClick={()=> {filterAnimojis("heart")}} >
+								{isFilteredBy === 'heart' ? '💝' : '💝heart💝'}
+						</button>
+					</p>
+					<p className='filter-description'>
+						{isFilteredBy && lookupObj[isFilteredBy]}
+					</p>
+				</div>
 				{data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
 						<button
@@ -144,3 +188,12 @@ async function getCurrentUser() {
 
 export default Account
 
+export async function getServerSideProps() {
+  let { data } = await supabase.from('animojis').select()
+
+  return {
+    props: {
+     animojis: data
+    },
+  }
+}

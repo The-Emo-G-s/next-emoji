@@ -30,7 +30,6 @@ const Login = ({animojis}) => {
         <Account session={session} animojis={animojis} />
         <button className="button block">
         <Link href='/click2'>Your Game</Link>
-				{/* <Storefront animojis={animojis} /> */}
         </button>
         </>
       )}
