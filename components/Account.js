@@ -15,11 +15,11 @@ function Account({ session, animojis }) {
 	const [isFilteredBy, setIsFilteredBy] = useState('');
 
 	const lookupObj = {
-		earth: 'Here are animals that typically live on the ground!',
-		fire: "Here are animals that don't currently exist.",
-		wind: "Here are animals that fly!",
-		water: "Here are animals that live in water!",
-		heart: "Here are close-ups or variations of animals found in other categories!"
+		earth: 'Here is where you can find animals that typically live on the ground! (Trees count as ground)',
+		fire: "Here is wehre you can find animals that don't currently exist.",
+		wind: "Here is where you can find animals that fly!",
+		water: "Here is where you can find animals that swim!",
+		heart: "Here is where you can find close-ups and variations of animals found in other categories!"
 	}
 
 	const filterAnimojis = (value)=> {
@@ -102,7 +102,7 @@ async function getCurrentUser() {
 
   return (
     <div className="form-widget">
-      <h1>Welcome back, {username}!</h1>
+      <h1>Welcome back{username && `, ${username}`}!</h1>
 			<img src={url} />
       <div>
         <label htmlFor="email">Email</label>

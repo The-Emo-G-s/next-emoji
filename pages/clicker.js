@@ -137,8 +137,8 @@ async function getCurrentUser() {
 
   return (
     <div>
-      <h1>Welcome, {username}!</h1>
-      <p>Points: {points}</p>
+      <h1>Click Away{username && `, ${username}`}!</h1>
+      <p>Points: {points.toLocaleString('en-US')}</p>
       <button
           onClick={() => updateGame({points})}
           disabled={loading}>
