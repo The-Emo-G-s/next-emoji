@@ -140,27 +140,27 @@ async function getCurrentUser() {
 						<button 
 							className={isFilteredBy === 'earth' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("earth")}} >
-								{isFilteredBy === 'earth' ? '🪨' : '🪨EARTH🪨'}
+								🪨 EARTH 🪨
 						</button>
 						<button 
 							className={isFilteredBy === 'fire' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("fire")}} >
-								{isFilteredBy === 'fire' ? '🔥' : '🔥FIRE🔥'}
+								🔥 FIRE 🔥
 						</button>
 						<button 
 							className={isFilteredBy === 'wind' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("wind")}} >
-								{isFilteredBy === 'wind' ? '🌬' : '🌬wind🌬'}
+								🌬 WIND 🌬
 						</button>
 						<button 
 							className={isFilteredBy === 'water' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("water")}} >
-								{isFilteredBy === 'water' ? '🌊' : '🌊water🌊'}
+								🌊 WATER 🌊
 						</button>
 						<button 
 							className={isFilteredBy === 'heart' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("heart")}} >
-								{isFilteredBy === 'heart' ? '💝' : '💝heart💝'}
+								💝 HEART 💝
 						</button>
 					</p>
 					<p className='filter-description'>

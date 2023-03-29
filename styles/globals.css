@@ -476,3 +476,7 @@ button.primary,
   flex: 50%
 }
 
+.active-filter-button {
+  border-color: khaki;
+  border-width: 5px;
+}
