@@ -1,24 +1,24 @@
-import { supabase } from '../utils/supabaseClient';
-// import Image from 'next/image';
-import { useState } from 'react';
-import Navbar from '@/components/ NavBar';
+// import { supabase } from '../utils/supabaseClient';
+// // import Image from 'next/image';
+// import { useState } from 'react';
+// import Navbar from '@/components/ NavBar';
 
-function Storefront ({ animojis }){
+// function Storefront ({ animojis }){
 
-	// const vouchers = log(sum(user.clicks)) - user.clickers.length;
-	const [list, setList] = useState(animojis);
-	const [filteredByEarth, setFilteredByEarth] = useState(1);
-	const [filteredByFire, setFilteredByFire] = useState(1);
-	const [filteredByWind, setFilteredByWind] = useState(1);
-	const [filteredByWater, setFilteredByWater] = useState(1);
-	const [filteredByHeart, setFilteredByHeart] = useState(1);
+// 	// const vouchers = log(sum(user.clicks)) - user.clickers.length;
+// 	const [list, setList] = useState(animojis);
+// 	const [filteredByEarth, setFilteredByEarth] = useState(1);
+// 	const [filteredByFire, setFilteredByFire] = useState(1);
+// 	const [filteredByWind, setFilteredByWind] = useState(1);
+// 	const [filteredByWater, setFilteredByWater] = useState(1);
+// 	const [filteredByHeart, setFilteredByHeart] = useState(1);
 
-  return (
-		<>
-			<Navbar />
-			{/* <div className='wealth-indicator'>
-				{`vouchers > 0 ? vouchers > 1 ? You can afford VOUCHERS clickers right now! : You can afford a clicker right now! : You cannot afford another clicker right now. 😿`}
-			</div> */}
+//   return (
+// 		<>
+// 			<Navbar />
+// 			{/* <div className='wealth-indicator'>
+// 				{`vouchers > 0 ? vouchers > 1 ? You can afford VOUCHERS clickers right now! : You can afford a clicker right now! : You cannot afford another clicker right now. 😿`}
+// 			</div> */}
 			<div className='sort-menu'>Sort by:
 				<p>
 					<button
@@ -53,31 +53,31 @@ function Storefront ({ animojis }){
 					>💝HEART💝</button>
 				</p>
 			</div>
-			<div className='store'>
-				{list.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
-					return (
-						<button
-							key={`product-${emoji.name}`}
-							onClick={(event)=> {
-								console.log(event.target.src)
-							}}
-						>
-							<img src={emoji.imageUrl} alt={emoji.name} />
-						</button>
-					)
-				})}
-			</div>
-		</>
-  )
-}
-// export async function getServerSideProps() {
-//   let { data } = await supabase.from('animojis').select()
-
-//   return {
-//     props: {
-//      turtlepuff: data
-//     },
-//   }
+// 			<div className='store'>
+// 				{list.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
+// 					return (
+// 						<button
+// 							key={`product-${emoji.name}`}
+// 							onClick={(event)=> {
+// 								console.log(event.target.src)
+// 							}}
+// 						>
+// 							<img src={emoji.imageUrl} alt={emoji.name} />
+// 						</button>
+// 					)
+// 				})}
+// 			</div>
+// 		</>
+//   )
 // }
+// // export async function getServerSideProps() {
+// //   let { data } = await supabase.from('animojis').select()
 
-export default Storefront
+// //   return {
+// //     props: {
+// //      turtlepuff: data
+// //     },
+// //   }
+// // }
+
+// export default Storefront
