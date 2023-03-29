@@ -3,11 +3,7 @@ import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Account from '@/components/Account';
 import Link from 'next/link';
-import Navbar from '@/components/ NavBar';
-import Storefront from './storefront';
 import { supabase } from '../utils/supabaseClient';
-import Clicker from '@/pages/clicker';
-import { useRouter } from 'next/router';
 
 
 const Login = ({animojis}) => {

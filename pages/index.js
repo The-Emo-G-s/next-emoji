@@ -1,14 +1,10 @@
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { supabase } from '../utils/supabaseClient';
-import Navbar from '../components/ NavBar';
 import Link from 'next/link';
-import Account from '@/components/Account';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Clicker from './click2';
 
-import { useState } from 'react';
-import Storefront from './storefront';
 
 const Home = () => {
 	const session = useSession()

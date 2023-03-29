@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 // import { AuthContext } from '../contexts/auth';
 import { useRouter } from 'next/router';
 import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react'
-import Navbar from '@/components/ NavBar';
+
 
 const upgrades = [
   { name: "🐌 Boost", description: "+1 point per click", cost: 100 },

@@ -1,8 +1,6 @@
 import { supabase } from '../utils/supabaseClient';
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
-import Avatar from './Avatar';
-import Storefront from '@/pages/storefront';
 
 function Account({ session, animojis }) {
   const supabase = useSupabaseClient()
