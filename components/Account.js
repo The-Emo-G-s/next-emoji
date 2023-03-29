@@ -12,7 +12,7 @@ function Account({ session, animojis }) {
   const [username, setUsername] = useState(null)
   const [url, setUrl] = useState(null)
   const [emoji, setEmoji] = useState(null)
-  const [points, setPoints] = useState(0)
+
 
   useEffect(() => {
 		getProfile();
@@ -50,7 +50,6 @@ async function getCurrentUser() {
         setUsername(data.username)
         setUrl(data.avatar_url)
         setEmoji(data.emoji)
-        setPoints(points)
       }
     } catch (error) {
       alert('Error loading user data!')
@@ -60,7 +59,7 @@ async function getCurrentUser() {
     }
   }
 
-  async function updateProfile({ username, points, avatar_url }) {
+  async function updateProfile({ username, avatar_url }) {
     try {
       setLoading(true)
 
@@ -68,7 +67,6 @@ async function getCurrentUser() {
         id: user.id,
         username,
         avatar_url,
-        points,
         updated_at: new Date().toISOString(),
       }
 
@@ -110,20 +108,11 @@ async function getCurrentUser() {
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor="points">Points:</label>
-        <input
-          id="points"
-          type="number"
-          value={points || ''}
-          onChange={(e) => setPoints(e.target.value)}
-        />
-      </div>
 
       <div>
         <button
           className="button primary block"
-          onClick={() => updateProfile({ username, points, avatar_url: url })}
+          onClick={() => updateProfile({ username, avatar_url: url })}
           disabled={loading}
         >
           {loading ? 'Loading ...' : 'Update'}
@@ -138,14 +127,14 @@ async function getCurrentUser() {
 			<div className='store'>
 				{data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
-						<button 
+						<button
 							key={`product-${emoji.name}`}
 							onClick={(event)=> {
 								setUrl(event.target.src)
 							}}
 						>
 							<img src={emoji.imageUrl} alt={emoji.name} />
-						</button>	
+						</button>
 					)
 				})}
 			</div>

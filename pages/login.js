@@ -10,14 +10,13 @@ import Clicker from '@/pages/clicker';
 import { useRouter } from 'next/router';
 
 
-const Login = ({ animojis }) => {
+const Login = ({animojis}) => {
   const session = useSession()
   const supabase = useSupabaseClient()
 
 
   return (
     <div>
-    <Navbar/>
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
 
       {!session ? (
