@@ -163,6 +163,7 @@ async function getCurrentUser() {
 						<h1>Click Away{username && `, ${username}`}!</h1>
      		 		<p>Points: {points.toLocaleString("en-US")}</p>
 						<button
+								id='emoji-button'
 								onClick={() => updateGame({points})}
 								disabled={loading}>
 									<img src={avatar_url}/>
