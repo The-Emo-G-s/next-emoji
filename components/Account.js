@@ -127,10 +127,10 @@ async function getCurrentUser() {
       </div>
 
       <div>
-        <button className="button block" onClick={() => supabase.auth.signOut()}>
+        <button className="button primary block" onClick={() => supabase.auth.signOut()}>
           Sign Out
         </button>
-				<Link href='/clicker'>Your Game</Link>
+				<Link className="button primary block" href='/clicker'>Your Game</Link>
       </div>
 			<div className='store'>
 				<h1>WHICH EMOJI ARE YOU??</h1>
@@ -168,7 +168,7 @@ async function getCurrentUser() {
 				</div>
 				{data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
-						<button
+						<button id = "emoji-select"
 							key={`product-${emoji.name}`}
 							onClick={(event)=> {
 								setUrl(event.target.src)

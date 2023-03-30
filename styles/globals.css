@@ -253,9 +253,9 @@ input[disabled] {
 
 button,
 .button {
-  color: var(--custom-color);
+  color: black;
   border: var(--custom-border);
-  background-color: var(--custom-bg-color);
+  background-color: var(--custom-color-brand);
   display: inline-block;
   text-align: center;
   border-radius: var(--custom-border-radius);
@@ -269,7 +269,7 @@ button,
 button.primary,
 .button.primary {
   background-color: var(--custom-color-brand);
-  border: 1px solid var(--custom-color-brand);
+  border: 1px solid black;
 }
 
 /* Widgets */
@@ -450,15 +450,17 @@ button.primary,
   display: flex;
   justify-content: center;
   height: 8vw;
-  background-color:khaki;
+  background-color:#24b47e;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: large;
   align-items: center;
+  
 }
 .link-home{
   text-decoration: none;
+  color: black;
 
- color: #222;
+
 
 }
 
@@ -477,6 +479,27 @@ button.primary,
 }
 
 .active-filter-button {
-  border-color: khaki;
+  border-color: #24b47e;
   border-width: 5px;
+}
+
+#emoji-button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+#emoji-select {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  color: none;
+}
+
+.button_primary_block{
+  border:#101010;
 }
