@@ -86,29 +86,7 @@ async function getCurrentUser() {
 
         updated_at: new Date().toISOString(),
       }
-
-			async function resetGame() {
-				try {
-					setLoading(true)
-					setPoints(0)
-					console.log(points)
-					const updates = {
-						id: user.id,
-						points,
-						updated_at: new Date().toISOString(),
-					}
-		
-		 await supabase.from('profiles').upsert(updates)
-					console.log('Point added!')
-				} catch (error) {
-					alert('Error updating the data!')
-					console.log(error)
-				} finally {
-					setLoading(false)
-				}
-			}
-
- await supabase.from('profiles').upsert(updates)
+ 		await supabase.from('profiles').upsert(updates)
       // alert('Point added!')
     } catch (error) {
       alert('Error updating the data!')
@@ -117,6 +95,27 @@ async function getCurrentUser() {
       setLoading(false)
     }
   }
+
+	async function resetGame() {
+		try {
+			setLoading(true)
+			setPoints(0)
+			console.log(points)
+			const updates = {
+				id: user.id,
+				points,
+				updated_at: new Date().toISOString(),
+			}
+
+ await supabase.from('profiles').upsert(updates)
+			console.log('Point added!')
+		} catch (error) {
+			alert('Error updating the data!')
+			console.log(error)
+		} finally {
+			setLoading(false)
+		}
+	}
   // const handleReset = async () => {
   //   const { data, error } = await supabase
   //     .from('users')
