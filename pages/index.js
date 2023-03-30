@@ -3,7 +3,7 @@ import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { supabase } from '../utils/supabaseClient';
 import Link from 'next/link';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
-import Clicker from './clicker';
+import Clicker from '../components/Clicker';
 
 
 const Home = () => {

@@ -17,7 +17,7 @@ const upgrades = [
 export default function Clicker ({session}) {
   const supabase = useSupabaseClient()
   const user = useUser()
-  const [points, setPoints] = useState(null);
+  const [points, setPoints] = useState(0);
   const [username, setUsername] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -43,8 +43,7 @@ async function getCurrentUser() {
   }
   return session.user
 }
-
-async function getGame() {
+  async function getGame() {
     try {
       setLoading(true)
       const user = await getCurrentUser()
@@ -80,7 +79,11 @@ async function getGame() {
       setPoints(points)
       const updates = {
         id: user.id,
+        username,
+        avatar_url,
+        autoclicks,
         points,
+
         updated_at: new Date().toISOString(),
       }
 
@@ -93,31 +96,6 @@ async function getGame() {
       setLoading(false)
     }
   }
-
-  async function resetGame({points}) {
-    try {
-      setLoading(true)
-      points
-      setPoints(0)
-      const updates = {
-        id: user.id,
-        points,
-        updated_at: new Date().toISOString(),
-      }
-
- await supabase.from('profiles').upsert(updates)
-      // alert('Point added!')
-    } catch (error) {
-      alert('Error updating the data!')
-      console.log(error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-
-
-
   // const handleReset = async () => {
   //   const { data, error } = await supabase
   //     .from('users')
@@ -159,26 +137,35 @@ async function getGame() {
 
   return (
     <div>
-      <h1>Welcome, {username}!</h1>
-      <p>Points: {points}</p>
-      <button
-          onClick={() => updateGame({points})}
-          disabled={loading}>
-          <img src={avatar_url}/>
-        </button>
-        <br></br>
-        <h2> 🌬 Boost:</h2>
-        {upgrades.map((upgrade) => (
-    <button key={upgrade.name}
-      onClick={() => purchaseUpgrade(upgrade)}
-      disabled={points < upgrade.cost}>
-      {upgrade.name} ({upgrade.cost} points):{" "}
-      {purchasedUpgrades[upgrade.name] || 0} purchased (
-      {upgrade.description})
-    </button>
-  )
-)}
-      <button onClick={resetGame}>Reset Points</button>
+			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' 
+				? <>
+						<h1>Click Away{username && `, ${username}`}!</h1>
+     		 		<p>Points: {points.toLocaleString("en-US")}</p>
+						<button
+								onClick={() => updateGame({points})}
+								disabled={loading}>
+									<img src={avatar_url}/>
+						</button>
+						<br></br>
+						<h2> 🌬 Boost:</h2>
+						{upgrades.map((upgrade) => (
+							<button key={upgrade.name}
+								onClick={() => purchaseUpgrade(upgrade)}
+								disabled={points < upgrade.cost}>
+								{upgrade.name} ({upgrade.cost} points):{" "}
+								{purchasedUpgrades[upgrade.name] || 0} purchased (
+								{upgrade.description})
+							</button>
+						))}
+					</> 
+				: <div>
+						<h1>Head to the ACCOUNT link above to set your ANIMOJI, then come back to start clicking!!!!</h1>
+						{/* insert carousel for bored eyes */}
+					</div>
+			}
+
+      {/* <button onClick={handleReset}>Reset Points</button> */}
+			
 
     </div>
   );
