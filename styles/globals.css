@@ -503,3 +503,7 @@ a {
 .button_primary_block{
   border:#101010;
 }
+
+.form-widget {
+	background: none;
+	}

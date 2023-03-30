@@ -130,7 +130,7 @@ async function getCurrentUser() {
         <button className="button primary block" onClick={() => supabase.auth.signOut()}>
           Sign Out
         </button>
-				<Link href='/'>My Clicker Game!</Link>
+				<Link className="button primary block" href='/'>My Clicker Game!</Link>
       </div>
 			<div className='store'>
 				<h1>Which ANIMOJI are you??</h1>
