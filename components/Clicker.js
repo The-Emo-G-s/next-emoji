@@ -83,7 +83,27 @@ async function getCurrentUser() {
         avatar_url,
         autoclicks,
         points,
+				updated_at: new Date().toISOString(),
+      }
 
+ await supabase.from('profiles').upsert(updates)
+      // alert('Point added!')
+    } catch (error) {
+      alert('Error updating the data!')
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function resetGame({points}) {
+    try {
+      setLoading(true)
+      points
+      setPoints(0)
+      const updates = {
+        id: user.id,
+        points,
         updated_at: new Date().toISOString(),
       }
 
