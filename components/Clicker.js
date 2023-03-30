@@ -137,26 +137,35 @@ async function getCurrentUser() {
 
   return (
     <div>
-      <h1>Click Away{username && `, ${username}`}!</h1>
-      <p>Points: {points.toLocaleString("en-US")}</p>
-      <button
-          onClick={() => updateGame({points})}
-          disabled={loading}>
-          <img src={avatar_url}/>
-        </button>
-        <br></br>
-        <h2> 🌬 Boost:</h2>
-        {upgrades.map((upgrade) => (
-    <button key={upgrade.name}
-      onClick={() => purchaseUpgrade(upgrade)}
-      disabled={points < upgrade.cost}>
-      {upgrade.name} ({upgrade.cost} points):{" "}
-      {purchasedUpgrades[upgrade.name] || 0} purchased (
-      {upgrade.description})
-    </button>
-  )
-)}
+			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' 
+				? <>
+						<h1>Click Away{username && `, ${username}`}!</h1>
+     		 		<p>Points: {points.toLocaleString("en-US")}</p>
+						<button
+								onClick={() => updateGame({points})}
+								disabled={loading}>
+									<img src={avatar_url}/>
+						</button>
+						<br></br>
+						<h2> 🌬 Boost:</h2>
+						{upgrades.map((upgrade) => (
+							<button key={upgrade.name}
+								onClick={() => purchaseUpgrade(upgrade)}
+								disabled={points < upgrade.cost}>
+								{upgrade.name} ({upgrade.cost} points):{" "}
+								{purchasedUpgrades[upgrade.name] || 0} purchased (
+								{upgrade.description})
+							</button>
+						))}
+					</> 
+				: <div>
+						<h1>Head to the ACCOUNT link above to set your ANIMOJI, then come back to start clicking!!!!</h1>
+						{/* insert carousel for bored eyes */}
+					</div>
+			}
+
       {/* <button onClick={handleReset}>Reset Points</button> */}
+			
 
     </div>
   );
