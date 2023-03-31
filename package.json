@@ -25,5 +25,9 @@
   },
   "devDependencies": {
     "eslint-config-next": "^13.2.4"
-  }
+  },
+  "keywords": [
+    "confetti",
+    "js-confetti"
+  ]
 }
