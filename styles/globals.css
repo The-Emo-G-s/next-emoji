@@ -508,8 +508,8 @@ a {
 	background: none;
 	}
 
-.pointss:focus {
+.pointss:active {
   
-    animation: rubberBand; /* referring directly to the animation's @keyframe declaration */
-    animation-duration: 0.6s; /* don't forget to set a duration! */
+    animation: heartBeat; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 0.5s; /* don't forget to set a duration! */
   }
