@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 // import { AuthContext } from '../contexts/auth';
 import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react';
 import 'animate.css';
+import JSConfetti from 'js-confetti'
 
 export default function Clicker ({session}) {
+  const jsConfetti = new JSConfetti()
   const supabase = useSupabaseClient()
   const user = useUser()
   const [points, setPoints] = useState(0);
@@ -69,7 +71,7 @@ export default function Clicker ({session}) {
 			console.log("points are", points, "powerOf10 is", powerOf10)
 			if(powerOf10 > 0 && !arrOfBoosts.includes(powerOf10)) {
 				setArrOfBoosts([...arrOfBoosts, powerOf10])
-			}			
+			}
 		} catch (error) {
 			alert('Error updating the data!')
 			console.log(error)
@@ -79,7 +81,7 @@ export default function Clicker ({session}) {
 		console.log("The Boosts array is:");
 		console.log(arrOfBoosts)
 	}
-	
+
 
 	async function save({points}) {
 		try {
@@ -98,12 +100,12 @@ export default function Clicker ({session}) {
 			setLoading(false)
 		}
 	}
-	
+
 	const activateBoost = (power)=> {
 		// usedBoost[power] = true;
 		setClickMultiplier(power+1)
 	}
-	
+
 	return (
 		<div>
 			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/'
@@ -113,10 +115,10 @@ export default function Clicker ({session}) {
               <br></br>
 						<button
 								id='emoji-button'
-								className='pointss' 
+								className='pointss'
 								onClick={() => updateGame({points})}
 								disabled={loading}>
-									<img 
+									<img
 										src={avatar_url}/>
 						</button>
 						<br></br>
@@ -133,9 +135,12 @@ export default function Clicker ({session}) {
 										return(
 											<div key={`boost-${power}`} className='boost-bar' style={{borderColor:"white", borderWidth: "2px", borderStyle: "dotted"}}>
 												<h3>You've unlocked a Boost! Activate to make every click worth {power + 1} points!</h3>
-												<button 
+												<button
 													className='boost-button'
 													onClick={(event)=> {
+                            jsConfetti.addConfetti({
+                              emojis: ['🎉', '🎊', '🥳'],
+                           })
 														console.log(event.target)
 														activateBoost(power)
 													}}
@@ -143,7 +148,7 @@ export default function Clicker ({session}) {
 											</div>
 										)
 									})}
-								</> 
+								</>
 							: null
 						}
 						</div>
@@ -202,4 +207,3 @@ export default function Clicker ({session}) {
 	// 		}
 	// 	}, 1000)
 	// }
-	
