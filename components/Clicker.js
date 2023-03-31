@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { AuthContext } from '../contexts/auth';
-import { useRouter } from 'next/router';
 import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react';
+import 'animate.css';
 
 export default function Clicker ({session}) {
   const supabase = useSupabaseClient()
@@ -14,43 +14,6 @@ export default function Clicker ({session}) {
 	const [arrOfBoosts, setArrOfBoosts] = useState([]);
   const [clickMultiplier, setClickMultiplier] = useState(1);
   const [powerOf10, setPowerOf10] = useState(0);
-
-
-	// const usedBoost = {
-	// 	0: false
-	// }
-
-
-
-
-
-	async function resetGame() {
-		try {
-			setLoading(true)
-			setPoints(0);
-			setArrOfBoosts([]);
-			setLevelUps(0);
-			setClickMultiplier(1);
-			console.log(points)
-			const updates = {
-				id: user.id,
-				points,
-				updated_at: new Date().toISOString(),
-			}
-			await supabase.from('profiles').upsert(updates)
-			console.log('Points reset!')
-		} catch (error) {
-			alert('Error updating the data!')
-			console.log(error)
-		} finally {
-			setLoading(false)
-		}
-	}
-
-
-
-
-
 
 
   useEffect(() => {
@@ -94,8 +57,113 @@ export default function Clicker ({session}) {
     } finally {
       setLoading(false)
     }
-		// updateBoosts(points)
   }
+
+
+  async function updateGame({ points }) {
+		try {
+			setLoading(true)
+			points = points + (1 * clickMultiplier);
+      		setPoints(points);
+			setPowerOf10(Math.floor(Math.log10(points)));
+			console.log("points are", points, "powerOf10 is", powerOf10)
+			if(powerOf10 > 0 && !arrOfBoosts.includes(powerOf10)) {
+				setArrOfBoosts([...arrOfBoosts, powerOf10])
+			}			
+		} catch (error) {
+			alert('Error updating the data!')
+			console.log(error)
+		} finally {
+			setLoading(false)
+		}
+		console.log("The Boosts array is:");
+		console.log(arrOfBoosts)
+	}
+	
+
+	async function save({points}) {
+		try {
+			setPoints(points)
+			const updates = {
+				id: user.id,
+				points: points,
+				updated_at: new Date().toISOString(),
+			}
+			await supabase.from('profiles').upsert(updates)
+			// alert('Point added!')
+		} catch (error) {
+			alert('Error updating the data!')
+			console.log(error)
+		} finally {
+			setLoading(false)
+		}
+	}
+	
+	const activateBoost = (power)=> {
+		// usedBoost[power] = true;
+		setClickMultiplier(power+1)
+	}
+	
+	return (
+		<div>
+			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/'
+				? <>
+						<h1>Click Away{username && `, ${username}`}!</h1>
+     		 		<p>Points: {points.toLocaleString("en-US")}</p>
+              <br></br>
+						<button
+								id='emoji-button'
+								className='pointss' 
+								onClick={() => updateGame({points})}
+								disabled={loading}>
+									<img 
+										src={avatar_url}/>
+						</button>
+						<br></br>
+						<button onClick={() => save({points})}> 🛟 Save</button>
+							<button style={{backgroundColor:"firebrick"}}onClick={() => resetGame(points)}>Reset Points</button>
+							{/* <button onClick={() => auto({points})}> 🚀 Activate Boost</button> */}
+						<h2>🚀 Boosts:</h2>
+						<div className='boost-container'>
+							{arrOfBoosts.length
+							?
+							<>
+									Horray, you've unlocked a boost! You're next boost comes after {Math.pow(10, arrOfBoosts[arrOfBoosts.length - 1] + 1).toLocaleString("en-US")} - keep clicking!!
+									{arrOfBoosts?.map((power)=> {
+										return(
+											<div key={`boost-${power}`} className='boost-bar' style={{borderColor:"white", borderWidth: "2px", borderStyle: "dotted"}}>
+												<h3>You've unlocked a Boost! Activate to make every click worth {power + 1} points!</h3>
+												<button 
+													className='boost-button'
+													onClick={(event)=> {
+														console.log(event.target)
+														activateBoost(power)
+													}}
+													>Activate</button>
+											</div>
+										)
+									})}
+								</> 
+							: null
+						}
+						</div>
+					</>
+				: <div>
+						<h1>Head to the ACCOUNT link above to set your ANIMOJI, then come back to start clicking!!!!</h1>
+						{/* insert carousel for bored eyes */}
+					</div>
+			}
+    </div>
+  );
+}
+
+
+// if(points > 1 && Math.floor(Math.log10(points)) === Math.floor(Math.log10(points - 1)) + 1) {
+// 	console.log('leveling up')
+// 	setArrOfBoosts([...arrOfBoosts, levelUps + 1])
+// 	setLevelUps(Math.floor(Math.log10(points)));
+// }
+
 
 	// const updateBoosts = (points)=> {
 	// 	console.log('The updateBoosts function is running on', points, "points.")
@@ -110,135 +178,28 @@ export default function Clicker ({session}) {
 	// 	// }
 	// }
 
-  async function updateGame({ points }) {
-		// console.log(usedBoost)
-		try {
-			setLoading(true)
-			points = points + (1 * clickMultiplier);
-      setPoints(points);
-			setPowerOf10(Math.floor(Math.log10(points)));
-			console.log("points are", points, "powerOf10 is", powerOf10)
-			// if(points > 1 && Math.floor(Math.log10(points)) === Math.floor(Math.log10(points - 1)) + 1) {
-			// 	console.log('leveling up')
-			// 	setArrOfBoosts([...arrOfBoosts, levelUps + 1])
-			// 	setLevelUps(Math.floor(Math.log10(points)));
-			// }
-			if(powerOf10 > 0 && !arrOfBoosts.includes(powerOf10)) {
-				setArrOfBoosts([...arrOfBoosts, powerOf10])
-			}
-      const updates = {
-				id: user.id,
-        points,
-        updated_at: new Date().toISOString(),
-      }
-			await supabase.from('profiles').upsert(updates)
-      // alert('Type an alert description here!')
-    } catch (error) {
-			alert('Error updating the data!')
-      console.log(error)
-    } finally {
-			setLoading(false)
-    }
-		console.log("The Boosts array is:");
-		console.log(arrOfBoosts)
-  }
 
-  async function auto({points}) {
-		const interval = setInterval(async()=> {
-			try {
-				setLoading(true)
-					const interval = setInterval(async() => {
-						setPoints((points) => points+ 1)
-						const updates = {
-							id: user.id,
-							points: points,
-							updated_at: new Date().toISOString(),
-						}
-						await supabase.from('profiles').upsert(updates)
-						console.log('Good thing happened!')
-					}, 1000)
-			} catch (error) {
-				alert('Error updating the data!')
-				console.log(error)
-			} finally {
-				setLoading(false)
-			}
-		}, 1000)
-	}
 
-  async function save({points}) {
-    try {
-      console.log(points, 'first')
-			setPoints(points)
-			console.log(points, 'points')
-      const updates = {
-        id: user.id,
-        points: points,
-        updated_at: new Date().toISOString(),
-      }
- 			await supabase.from('profiles').upsert(updates)
-      // alert('Point added!')
-    } catch (error) {
-      alert('Error updating the data!')
-      console.log(error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-	const activateBoost = (power)=> {
-		// usedBoost[power] = true;
-		setClickMultiplier(power+1)
-	}
-
-  return (
-    <div>
-			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/'
-				? <>
-						<h1>Click Away{username && `, ${username}`}!</h1>
-     		 		<p>Points: {points.toLocaleString("en-US")}</p>
-              <br></br>
-						<button
-								id='emoji-button'
-								onClick={() => updateGame({points})}
-								disabled={loading}>
-									<img src={avatar_url}/>
-						</button>
-						<br></br>
-						<button onClick={() => save({points})}> 🛟 Save</button>
-							<button style={{backgroundColor:"firebrick"}}onClick={() => resetGame(points)}>Reset Points</button>
-							{/* <button onClick={() => auto({points})}> 🚀 Activate Boost</button> */}
-						<h2>🚀 Boosts:</h2>
-						<div className='boost-container'>
-							{arrOfBoosts.length
-							?
-								<>
-									Horray, you've unlocked a boost! You're next boost comes after {Math.pow(10, arrOfBoosts[arrOfBoosts.length - 1] + 1).toLocaleString("en-US")} - keep clicking!!
-									{arrOfBoosts?.map((power)=> {
-										return(
-											<div key={`boost-${power}`} className='boost-bar' style={{borderColor:"white", borderWidth: "2px", borderStyle: "dotted"}}>
-												<h3>You've unlocked a Boost! Activate to make every click worth {power + 1} points!</h3>
-												<button 
-													className='boost-button'
-													onClick={(event)=> {
-														console.log(event.target)
-														activateBoost(power)
-													}}
-												>Activate</button>
-											</div>
-										)
-									})}
-								</> 
-							: null
-							}
-						</div>
-					</>
-				: <div>
-						<h1>Head to the ACCOUNT link above to set your ANIMOJI, then come back to start clicking!!!!</h1>
-						{/* insert carousel for bored eyes */}
-					</div>
-			}
-    </div>
-  );
-}
-
+		// async function auto({points}) {
+	// 	const interval = setInterval(async()=> {
+	// 		try {
+	// 			setLoading(true)
+	// 			const interval = setInterval(async() => {
+	// 				setPoints((points) => points+ 1)
+	// 				const updates = {
+	// 					id: user.id,
+	// 					points: points,
+	// 					updated_at: new Date().toISOString(),
+	// 				}
+	// 				await supabase.from('profiles').upsert(updates)
+	// 				console.log('Good thing happened!')
+	// 			}, 1000)
+	// 		} catch (error) {
+	// 			alert('Error updating the data!')
+	// 			console.log(error)
+	// 		} finally {
+	// 			setLoading(false)
+	// 		}
+	// 	}, 1000)
+	// }
+	
