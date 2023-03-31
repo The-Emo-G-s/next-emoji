@@ -507,3 +507,9 @@ a {
 .form-widget {
 	background: none;
 	}
+
+.pointss:focus {
+  
+    animation: rubberBand; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 0.6s; /* don't forget to set a duration! */
+  }

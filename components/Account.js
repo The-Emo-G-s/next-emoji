@@ -89,7 +89,6 @@ async function getCurrentUser() {
 
       let { error } = await supabase.from('profiles').upsert(updates)
       if (error) throw error
-      alert('Profile updated!')
     } catch (error) {
       alert('Error updating the data!')
       console.log(error)
