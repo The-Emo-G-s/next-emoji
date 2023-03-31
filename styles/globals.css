@@ -513,13 +513,12 @@ a {
 	}
 
 .pointss:active {
-
     animation: heartBeat; /* referring directly to the animation's @keyframe declaration */
     animation-duration: 0.5s; /* don't forget to set a duration! */
   }
 
   .animoji {
-    height: 800px;
+    height: 600px;
   }
 
   .animojiz:active {
@@ -535,3 +534,13 @@ a {
     display: flex;
     justify-content: center;
   }
+  .title-{
+    display: flex;
+    justify-content: center;
+  }
+  .sort-menu{
+    display: flex;
+    justify-content: center;
+  }
+
+

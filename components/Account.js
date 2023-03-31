@@ -102,7 +102,9 @@ async function getCurrentUser() {
   return (
     <div className="form-widget">
       <h1 className="username-title">Welcome{username && ` back, ${username}`}!</h1>
+      <div className='username-img'>
 			{url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' && <img className='username-img' src={url} />}
+      </div>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -134,30 +136,31 @@ async function getCurrentUser() {
 				<Link className="button primary block" href='/'>My Clicker Game!</Link>
       </div>
 			<div className='store'>
-				<h1>Which ANIMOJI are you??</h1>
+				<h1 className='title-'>Which ANIMOJI are you??</h1>
 				<div className='sort-menu'>Sort by:
+
 					<p>
-						<button 
+						<button
 							className={isFilteredBy === 'earth' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("earth")}} >
 								🪨 EARTH 🪨
 						</button>
-						<button 
+						<button
 							className={isFilteredBy === 'fire' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("fire")}} >
 								🔥 FIRE 🔥
 						</button>
-						<button 
+						<button
 							className={isFilteredBy === 'wind' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("wind")}} >
 								🌬 WIND 🌬
 						</button>
-						<button 
+						<button
 							className={isFilteredBy === 'water' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("water")}} >
 								🌊 WATER 🌊
 						</button>
-						<button 
+						<button
 							className={isFilteredBy === 'heart' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("heart")}} >
 								💝 HEART 💝
@@ -167,7 +170,7 @@ async function getCurrentUser() {
 						{isFilteredBy && lookupObj[isFilteredBy]}
 					</p>
 				</div>
-            <Grid container rowSpacing={6} columnSpacing={{ xs: 6}} wrap='wrap'>              
+            <Grid container rowSpacing={6} columnSpacing={{ xs: 6}} wrap='wrap'>
 				{data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
             <Grid xs={3} wrap='wrap'>
@@ -176,7 +179,7 @@ async function getCurrentUser() {
                 onClick={(event)=> {
                   setUrl(event.target.src)}}>
                 <img src={emoji.imageUrl} alt={emoji.name} />
-              </button>         
+              </button>
                </Grid>
           )})}
 

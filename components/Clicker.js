@@ -113,8 +113,8 @@ export default function Clicker ({session}) {
 		<div>
 			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/'
 				? <>
-						<h1>Click Away{username && `, ${username}`}!</h1>
-     		 		<p>Points: {points.toLocaleString("en-US")}</p>
+						<h1 className='title-'>Click Away{username && `, ${username}`}!</h1>
+     		 		<p className='title-'>Points: {points.toLocaleString("en-US")}</p>
               <br></br>
 						<button
 								id='emoji-button'
@@ -125,7 +125,7 @@ export default function Clicker ({session}) {
 										src={avatar_url}/>
 						</button>
 						<br></br>
-						<Stack 
+						<Stack
 							direction="row"
 							spacing={3}
 							justifyContent='center'>
