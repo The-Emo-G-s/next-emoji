@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { AuthContext } from '../contexts/auth';
 import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react';
 import 'animate.css';
 import JSConfetti from 'js-confetti'
