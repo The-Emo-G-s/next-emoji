@@ -120,38 +120,60 @@ async function getCurrentUser() {
 		console.log("The level is:", levelUps, "The Boosts array is:");
 		console.log(arrOfBoosts)
   }
+  async function auto({points}) {
+    try {
+      setLoading(true)
+      if(points >= 10){
+const interval = setInterval(() => {
+  setPoints((points) => points+ 1)
+}, 1000)}
+      const updates = {
+        id: user.id,
+        points: points,
+        updated_at: new Date().toISOString(),
+      }
 
-  // const purchaseUpgrade = (upgrade) => {
-  //   if (points >= upgrade.cost) {
-  //     setPoints(points - upgrade.cost);
+ await supabase.from('profiles').upsert(updates)
+      // alert('Point added!')
+    } catch (error) {
+      alert('Error updating the data!')
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
 
-  //     switch (upgrade.name) {
-  //       case "Click Boost":
-  //         setClickerCount(clickerCount + 1);
-  //         break;
-  //       case "Auto Clicker":
-  //         setAutoCount(autoCount + 1);
-  //         break;
-  //       case "Idle Boost":
-  //         setIdleCount(idleCount + 1);
-  //         break;
-  //       default:
-  //         break;
-  //     }
+  }
 
-  //     setPurchasedUpgrades({
-  //       ...purchasedUpgrades,
-  //       [upgrade.name]: purchasedUpgrades[upgrade.name] + 1 || 1,
-  //     });
-  //   }
-  // };
+  async function save({points}) {
+    try {
+      console.log(points, 'first')
+  setPoints(points)
+  console.log(points, 'points')
+      const updates = {
+        id: user.id,
+        points: points,
+        updated_at: new Date().toISOString(),
+      }
+
+ await supabase.from('profiles').upsert(updates)
+      // alert('Point added!')
+    } catch (error) {
+      alert('Error updating the data!')
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+
+  }
 
   return (
     <div>
-			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' 
+			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/'
 				? <>
 						<h1>Click Away{username && `, ${username}`}!</h1>
      		 		<p>Points: {points.toLocaleString("en-US")}</p>
+              <button onClick={() => save({points})}> 🛟 Save</button>
+              <br></br>
 						<button
 								id='emoji-button'
 								onClick={() => updateGame({points})}
@@ -187,6 +209,8 @@ async function getCurrentUser() {
 
 			
 
+
+<button onClick={() => auto({points})}> 🚀 Activate Boost</button>
     </div>
   );
 }
