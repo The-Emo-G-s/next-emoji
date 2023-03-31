@@ -24,8 +24,6 @@ const Login = ({animojis}) => {
       ) : (
         <>
         <Account session={session} animojis={animojis} />
-        <button className="button block">
-        </button>
         </>
       )}
     </div>

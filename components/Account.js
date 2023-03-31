@@ -2,6 +2,7 @@ import { supabase } from '../utils/supabaseClient';
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
+import Grid from '@mui/material/Unstable_Grid2';
 
 function Account({ session, animojis }) {
   const supabase = useSupabaseClient()
@@ -97,10 +98,11 @@ async function getCurrentUser() {
     }
   }
 
+
   return (
     <div className="form-widget">
-      <h1>Welcome{username && ` back, ${username}`}!</h1>
-			{url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' && <img src={url} />}
+      <h1 className="username-title">Welcome{username && ` back, ${username}`}!</h1>
+			{url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' && <img className='username-img' src={url} />}
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -165,18 +167,20 @@ async function getCurrentUser() {
 						{isFilteredBy && lookupObj[isFilteredBy]}
 					</p>
 				</div>
+            <Grid container rowSpacing={6} columnSpacing={{ xs: 6}} wrap='wrap'>              
 				{data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
-						<button id = "emoji-select"
-							key={`product-${emoji.name}`}
-							onClick={(event)=> {
-								setUrl(event.target.src)
-							}}
-						>
-							<img src={emoji.imageUrl} alt={emoji.name} />
-						</button>
-					)
-				})}
+            <Grid xs={3} wrap='wrap'>
+              <button id = "emoji-select"
+                key={`product-${emoji.name}`}
+                onClick={(event)=> {
+                  setUrl(event.target.src)}}>
+                <img src={emoji.imageUrl} alt={emoji.name} />
+              </button>         
+               </Grid>
+          )})}
+
+        </Grid>
 			</div>
     </div>
   )

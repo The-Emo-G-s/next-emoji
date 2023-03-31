@@ -495,6 +495,10 @@ button.primary,
   background: none;
 }
 
+#emoji-select:active {
+  border: 1px white solid;
+}
+
 a {
   text-decoration: none;
   color: none;
@@ -512,4 +516,22 @@ a {
   
     animation: heartBeat; /* referring directly to the animation's @keyframe declaration */
     animation-duration: 0.5s; /* don't forget to set a duration! */
+  }
+
+  .animoji {
+    height: 800px;
+  }
+
+  .animojiz:active {
+    border: 1px white solid;
+  }
+
+  .username-title {
+    display: flex;
+    justify-content: center;
+  }
+
+  .username-img {
+    display: flex;
+    justify-content: center;
   }

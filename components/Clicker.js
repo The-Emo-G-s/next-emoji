@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react';
 import 'animate.css';
 import JSConfetti from 'js-confetti'
+import Stack from '@mui/material/Stack';
 
 export default function Clicker ({session}) {
   const jsConfetti = new JSConfetti()
@@ -60,7 +61,9 @@ export default function Clicker ({session}) {
       setLoading(false)
     }
   }
-
+  function resetGame() {
+	setPoints(0);
+  }
 
   async function updateGame({ points }) {
 		try {
@@ -118,12 +121,17 @@ export default function Clicker ({session}) {
 								className='pointss'
 								onClick={() => updateGame({points})}
 								disabled={loading}>
-									<img
+									<img className="animoji"
 										src={avatar_url}/>
 						</button>
 						<br></br>
+						<Stack 
+							direction="row"
+							spacing={3}
+							justifyContent='center'>
 						<button onClick={() => save({points})}> 🛟 Save</button>
-							<button style={{backgroundColor:"firebrick"}}onClick={() => resetGame(points)}>Reset Points</button>
+						<button style={{backgroundColor:"firebrick"}}onClick={() => resetGame(points)}>Reset Points</button>
+						</Stack>
 							{/* <button onClick={() => auto({points})}> 🚀 Activate Boost</button> */}
 						<h2>🚀 Boosts:</h2>
 						<div className='boost-container'>
@@ -137,13 +145,9 @@ export default function Clicker ({session}) {
 												<h3>You've unlocked a Boost! Activate to make every click worth {power + 1} points!</h3>
 												<button
 													className='boost-button'
-													onClick={(event)=> {
-                            jsConfetti.addConfetti({
-                              emojis: ['🎉', '🎊', '🥳'],
-                           })
-														console.log(event.target)
-														activateBoost(power)
-													}}
+													onClick={(event)=> {jsConfetti.addConfetti({emojis: ['🎉', '🎊', '🥳'],})
+													console.log(event.target)
+													activateBoost(power)}}
 													>Activate</button>
 											</div>
 										)
