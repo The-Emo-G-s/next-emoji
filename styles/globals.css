@@ -454,7 +454,7 @@ button.primary,
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: large;
   align-items: center;
-  
+
 }
 .link-home{
   text-decoration: none;
@@ -513,7 +513,7 @@ a {
 	}
 
 .pointss:active {
-  
+
     animation: heartBeat; /* referring directly to the animation's @keyframe declaration */
     animation-duration: 0.5s; /* don't forget to set a duration! */
   }
