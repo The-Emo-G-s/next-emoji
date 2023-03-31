@@ -100,8 +100,8 @@ async function getCurrentUser() {
 
   return (
     <div className="form-widget">
-      <h1>Welcome back{username && `, ${username}`}!</h1>
-			<img src={url} />
+      <h1>Welcome{username && ` back, ${username}`}!</h1>
+			{url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' && <img src={url} />}
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -130,10 +130,10 @@ async function getCurrentUser() {
         <button className="button primary block" onClick={() => supabase.auth.signOut()}>
           Sign Out
         </button>
-				<Link className="button primary block" href='/'>Your Game</Link>
+				<Link className="button primary block" href='/'>My Clicker Game!</Link>
       </div>
 			<div className='store'>
-				<h1>WHICH EMOJI ARE YOU??</h1>
+				<h1>Which ANIMOJI are you??</h1>
 				<div className='sort-menu'>Sort by:
 					<p>
 						<button 
