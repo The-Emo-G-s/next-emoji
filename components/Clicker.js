@@ -13,7 +13,12 @@ export default function Clicker ({session}) {
   const [loading, setLoading] = useState(true);
 	const [arrOfBoosts, setArrOfBoosts] = useState([]);
   const [clickMultiplier, setClickMultiplier] = useState(1);
-  const [boostActivated, setBoostActivated] = useState(0);
+  const [powerOf10, setPowerOf10] = useState(0);
+
+
+	// const usedBoost = {
+	// 	0: false
+	// }
 
 
 
@@ -52,19 +57,20 @@ export default function Clicker ({session}) {
     getGame()
   }, [session])
 
-async function getCurrentUser() {
-  const{
-    data: { session },
-    error,
-  } = await supabase.auth.getSession()
-  if (error) {
-    throw error
-  }
-  if(!session?.user){
-    throw new Error('you are not logged in')
-  }
-  return session.user
-}
+	async function getCurrentUser() {
+		const{
+			data: { session },
+			error,
+		} = await supabase.auth.getSession()
+		if (error) {
+			throw error
+		}
+		if(!session?.user){
+			throw new Error('you are not logged in')
+		}
+		return session.user
+	}
+
   async function getGame() {
     try {
       setLoading(true)
@@ -88,27 +94,37 @@ async function getCurrentUser() {
     } finally {
       setLoading(false)
     }
-		updateBoosts({points})
+		// updateBoosts(points)
   }
 
-	const updateBoosts = ({points})=> {
-		if(points > 1) {
-			setLevelUps(Math.floor(Math.log10(points)));
-		}
-		for(let i = 0; i < levelUps; i++) {
-			setArrOfBoosts([...arrOfBoosts, levelUps + 1]);
-		}
-	}
+	// const updateBoosts = (points)=> {
+	// 	console.log('The updateBoosts function is running on', points, "points.")
+	// 	if(points > 1) {
+	// 		console.log("Points IS greater than 1, so we'll set the levelUps to be:");
+	// 		console.log(Math.floor(Math.log10(points)));
+	// 		levelUps = Math.floor(Math.log10(points))
+	// 		setLevelUps(levelUps);
+	// 	}
+	// 	// for(let i = 0; i < levelUps; i++) {
+	// 	// 	setArrOfBoosts([...arrOfBoosts, levelUps + 1]);
+	// 	// }
+	// }
 
   async function updateGame({ points }) {
+		// console.log(usedBoost)
 		try {
 			setLoading(true)
 			points = points + (1 * clickMultiplier);
       setPoints(points);
-			if(points > 1 && Math.floor(Math.log10(points)) === Math.floor(Math.log10(points - 1)) + 1) {
-				console.log('leveling up')
-				setArrOfBoosts([...arrOfBoosts, levelUps + 1])
-				setLevelUps(Math.floor(Math.log10(points)));
+			setPowerOf10(Math.floor(Math.log10(points)));
+			console.log("points are", points, "powerOf10 is", powerOf10)
+			// if(points > 1 && Math.floor(Math.log10(points)) === Math.floor(Math.log10(points - 1)) + 1) {
+			// 	console.log('leveling up')
+			// 	setArrOfBoosts([...arrOfBoosts, levelUps + 1])
+			// 	setLevelUps(Math.floor(Math.log10(points)));
+			// }
+			if(powerOf10 > 0 && !arrOfBoosts.includes(powerOf10)) {
+				setArrOfBoosts([...arrOfBoosts, powerOf10])
 			}
       const updates = {
 				id: user.id,
@@ -123,7 +139,7 @@ async function getCurrentUser() {
     } finally {
 			setLoading(false)
     }
-		console.log("The level is:", levelUps, "The Boosts array is:");
+		console.log("The Boosts array is:");
 		console.log(arrOfBoosts)
   }
 
@@ -131,7 +147,6 @@ async function getCurrentUser() {
 		const interval = setInterval(async()=> {
 			try {
 				setLoading(true)
-				if(points >= 10){
 					const interval = setInterval(async() => {
 						setPoints((points) => points+ 1)
 						const updates = {
@@ -141,7 +156,7 @@ async function getCurrentUser() {
 						}
 						await supabase.from('profiles').upsert(updates)
 						console.log('Good thing happened!')
-					}, 1000)}
+					}, 1000)
 			} catch (error) {
 				alert('Error updating the data!')
 				console.log(error)
@@ -171,13 +186,9 @@ async function getCurrentUser() {
     }
   }
 
-	const activateBoost = async(power)=> {
-		if (power % 2 !== 0) {
-			auto();
-		}
-		else {
-			setClickMultiplier(power)
-		}
+	const activateBoost = (power)=> {
+		// usedBoost[power] = true;
+		setClickMultiplier(power+1)
 	}
 
   return (
@@ -196,33 +207,24 @@ async function getCurrentUser() {
 						<br></br>
 						<button onClick={() => save({points})}> 🛟 Save</button>
 							<button style={{backgroundColor:"firebrick"}}onClick={() => resetGame(points)}>Reset Points</button>
-							<button onClick={() => auto({points})}> 🚀 Activate Boost</button>
+							{/* <button onClick={() => auto({points})}> 🚀 Activate Boost</button> */}
 						<h2>🚀 Boosts:</h2>
 						<div className='boost-container'>
-							{levelUps > 0
+							{arrOfBoosts.length
 							?
 								<>
-									Horray, you've unlocked a boost! You're next boost comes at {Math.pow(10, arrOfBoosts[arrOfBoosts.length - 1] + 1).toLocaleString("en-US")}
+									Horray, you've unlocked a boost! You're next boost comes after {Math.pow(10, arrOfBoosts[arrOfBoosts.length - 1] + 1).toLocaleString("en-US")} - keep clicking!!
 									{arrOfBoosts?.map((power)=> {
 										return(
 											<div key={`boost-${power}`} className='boost-bar' style={{borderColor:"white", borderWidth: "2px", borderStyle: "dotted"}}>
-												<h3>You've unlocked a Boost! Activate to {power % 2 === 0 
-													? 
-														`make every click worth ${power} points!`
-													: 
-														`have your clicker click for you ${power} time every second!` 
-												}</h3>
-												{/* clever text for ? even numbers : odd numbers */}
+												<h3>You've unlocked a Boost! Activate to make every click worth {power + 1} points!</h3>
 												<button 
 													className='boost-button'
-													onClick={()=> {
-														if(power % 2 !== 0) {
-															auto({ points });
-														} else {
-															activateBoost(power);;
-														}
+													onClick={(event)=> {
+														console.log(event.target)
+														activateBoost(power)
 													}}
-													>Activate</button>
+												>Activate</button>
 											</div>
 										)
 									})}
