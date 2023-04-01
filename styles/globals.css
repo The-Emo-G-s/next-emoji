@@ -36,19 +36,16 @@ body,
 }
 
 /* Grid */
-
 .dark-mode {
   --custom-bg-color: var(--custom-bg-color-dark);
   --custom-panel-color: var(--custom-panel-color-dark);
   --custom-color: var(--custom-color-dark);
 }
-
 .light-mode {
   --custom-bg-color: var(--custom-bg-color-light);
   --custom-panel-color: var(--custom-panel-color-light);
   --custom-color: var(--custom-color-light);
 }
-
 .container {
   width: 90%;
   margin-left: auto;
@@ -121,14 +118,12 @@ body,
 .hidden-sm {
   display: none;
 }
-
 @media only screen and (min-width: 33.75em) {
   /* 540px */
   .container {
     width: 80%;
   }
 }
-
 @media only screen and (min-width: 45em) {
   /* 720px */
   .col-1 {
@@ -171,7 +166,6 @@ body,
     display: block;
   }
 }
-
 @media only screen and (min-width: 60em) {
   /* 960px */
   .container {
@@ -181,7 +175,6 @@ body,
 }
 
 /* Forms */
-
 label {
   display: block;
   margin: 5px 0;
@@ -189,7 +182,6 @@ label {
   font-size: 0.8rem;
   text-transform: uppercase;
 }
-
 input {
   width: 100%;
   border-radius: 5px;
@@ -199,13 +191,11 @@ input {
   background-color: var(--custom-bg-color);
   color: var(--custom-color);
 }
-
 input[disabled] {
   color: var(--custom-color-secondary);
 }
 
 /* Utils */
-
 .block {
   display: block;
   width: 100%;
@@ -250,7 +240,6 @@ input[disabled] {
 }
 
 /* Button */
-
 button,
 .button {
   color: black;
@@ -265,7 +254,6 @@ button,
   font-size: 0.9rem;
   text-transform: uppercase;
 }
-
 button.primary,
 .button.primary {
   background-color: var(--custom-color-brand);
@@ -273,7 +261,6 @@ button.primary,
 }
 
 /* Widgets */
-
 .card {
   width: 100%;
   display: block;
@@ -281,7 +268,6 @@ button.primary,
   border-radius: var(--custom-border-radius);
   padding: var(--custom-spacing);
 }
-
 .avatar {
   border-radius: var(--custom-border-radius);
   overflow: hidden;
@@ -295,7 +281,6 @@ button.primary,
   border: 1px solid rgb(200, 200, 200);
   border-radius: 5px;
 }
-
 .footer {
   position: absolute;
   max-width: 100%;
@@ -323,7 +308,6 @@ button.primary,
 .footer > div:nth-child(2) {
   justify-content: left;
 }
-
 @media only screen and (min-width: 60em) {
   /* 960px */
   .footer > div:first-child {
@@ -333,7 +317,6 @@ button.primary,
     justify-content: center;
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -342,13 +325,11 @@ button.primary,
     transform: rotate(360deg);
   }
 }
-
 .mainHeader {
   width: 100%;
   font-size: 1.3rem;
   margin-bottom: 20px;
 }
-
 .avatarPlaceholder {
   border: var(--custom-border);
   border-radius: var(--custom-border-radius);
@@ -361,7 +342,6 @@ button.primary,
 }
 
 /* Auth */
-
 .auth-widget {
   display: flex;
   flex-direction: column;
@@ -390,7 +370,6 @@ button.primary,
 }
 
 /* Account */
-
 .account {
   display: flex;
   flex-direction: column;
@@ -408,7 +387,6 @@ button.primary,
 }
 
 /* Profile Card */
-
 .profileCard {
   border-radius: 5px;
   display: flex;
@@ -446,6 +424,7 @@ button.primary,
   margin-bottom: 10px;
   text-decoration: none;
 }
+
 .container-nav{
   display: flex;
   justify-content: center;
@@ -454,7 +433,6 @@ button.primary,
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: large;
   align-items: center;
-  
 }
 .link-home{
   text-decoration: none;
@@ -463,7 +441,6 @@ button.primary,
 
 
 }
-
 
 .container-dept{
   display: flex;
@@ -506,4 +483,62 @@ a {
 
 .form-widget {
 	background: none;
-	}
+}
+
+.pointss:active {
+	animation: heartBeat; /* referring directly to the animation's @keyframe declaration */
+	animation-duration: 0.5s; /* don't forget to set a duration! */
+}
+
+.pointss {
+	background: none;
+	border: none;
+}
+
+.animoji {
+  height: 600px;
+}
+
+.animojiz:active {
+  border: 1px white solid;
+}
+
+.username-title {
+	display: flex;
+	justify-content: center;
+}
+
+.username-img {
+	display: flex;
+	justify-content: center;
+}
+
+.title-{
+	display: flex;
+	justify-content: center;
+}
+
+.sort-menu{
+	display: flex;
+	justify-content: center;
+}
+
+#carousel-pic {
+	height: 35px;
+	bottom: 0;
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+
+#mode-toggle:hover::after {
+	content: attr(title);
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 0.5em;
+	background-color: yellow;
+	border-radius: 0.5em;
+	white-space: nowrap;
+	z-index: 1;
+}
