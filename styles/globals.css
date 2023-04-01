@@ -517,6 +517,11 @@ a {
     animation-duration: 0.5s; /* don't forget to set a duration! */
   }
 
+  .pointss {
+    background: none;
+    border: none;
+  }
+
   .animoji {
     height: 600px;
   }

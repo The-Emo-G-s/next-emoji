@@ -116,14 +116,15 @@ export default function Clicker ({session}) {
 						<h1 className='title-'>Click Away{username && `, ${username}`}!</h1>
      		 		<p className='title-'>Points: {points.toLocaleString("en-US")}</p>
               <br></br>
+			  		<div className='emoji'>
 						<button
-								id='emoji-button'
 								className='pointss'
 								onClick={() => updateGame({points})}
 								disabled={loading}>
 									<img className="animoji"
 										src={avatar_url}/>
 						</button>
+					</div>
 						<br></br>
 						<Stack
 							direction="row"
@@ -156,6 +157,14 @@ export default function Clicker ({session}) {
 							: null
 						}
 						</div>
+						<style jsx>
+							{`
+							.emoji {
+								display: flex;
+								justify-content: center;
+							}
+							`}
+						</style>
 					</>
 				: <div>
 						<h1>Head to the ACCOUNT link above to set your ANIMOJI, then come back to start clicking!!!!</h1>
