@@ -2,6 +2,9 @@ import { supabase } from '../utils/supabaseClient';
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
+import Grid from '@mui/material/Unstable_Grid2';
+import Stack from '@mui/material/Stack';
+// import Button from '@mui/material/Button';
 
 function Account({ session, animojis }) {
   const supabase = useSupabaseClient()
@@ -13,13 +16,6 @@ function Account({ session, animojis }) {
   const [url, setUrl] = useState(null)
 	const [isFilteredBy, setIsFilteredBy] = useState('');
 
-	const lookupObj = {
-		earth: 'Here is where you can find animals that typically live on the ground! (Trees count as ground.)',
-		fire: "Here is wehre you can find animals that don't currently exist.",
-		wind: "Here is where you can find animals that fly!",
-		water: "Here is where you can find animals that swim!",
-		heart: "Here is where you can find close-ups and variations of animals found in other categories!"
-	}
 
 	const filterAnimojis = (value)=> {
 		if (isFilteredBy === value) {
@@ -89,7 +85,6 @@ async function getCurrentUser() {
 
       let { error } = await supabase.from('profiles').upsert(updates)
       if (error) throw error
-      alert('Profile updated!')
     } catch (error) {
       alert('Error updating the data!')
       console.log(error)
@@ -98,10 +93,12 @@ async function getCurrentUser() {
     }
   }
 
+
   return (
+    <>
     <div className="form-widget">
-      <h1>Welcome{username && ` back, ${username}`}!</h1>
-			{url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' && <img src={url} />}
+      <h1 className="username-title">Welcome{username && ` back, ${username}`}!</h1>
+			{url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' && <img className='username-img' src={url} />}
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -134,52 +131,72 @@ async function getCurrentUser() {
       </div>
 			<div className='store'>
 				<h1>Which ANIMOJI are you??</h1>
-				<div className='sort-menu'>Sort by:
+				<div className='sort-menu'>
 					<p>
-						<button 
+          <div className='buttons'>
+          <Stack direction="row" spacing={2}> 
+						<button
+              id='filerButton' 
 							className={isFilteredBy === 'earth' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("earth")}} >
 								🪨 EARTH 🪨
 						</button>
 						<button 
+              id='filerButton'
 							className={isFilteredBy === 'fire' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("fire")}} >
 								🔥 FIRE 🔥
 						</button>
 						<button 
+              id='filerButton'
 							className={isFilteredBy === 'wind' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("wind")}} >
 								🌬 WIND 🌬
 						</button>
 						<button 
+              id='filerButton'
 							className={isFilteredBy === 'water' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("water")}} >
 								🌊 WATER 🌊
 						</button>
 						<button 
+              id='filerButton'
 							className={isFilteredBy === 'heart' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("heart")}} >
 								💝 HEART 💝
 						</button>
+          </Stack>
+          </div>
 					</p>
-					<p className='filter-description'>
-						{isFilteredBy && lookupObj[isFilteredBy]}
-					</p>
+
 				</div>
+            <Grid container rowSpacing={6} columnSpacing={{ xs: 6}} wrap='wrap'>              
 				{data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
-						<button id = "emoji-select"
-							key={`product-${emoji.name}`}
-							onClick={(event)=> {
-								setUrl(event.target.src)
-							}}
-						>
-							<img src={emoji.imageUrl} alt={emoji.name} />
-						</button>
-					)
-				})}
+            <Grid xs={3} wrap='wrap'>
+              <button id = "emoji-select"
+                key={`product-${emoji.name}`}
+                onClick={(event)=> {
+                  setUrl(event.target.src)}}>
+                <img src={emoji.imageUrl} alt={emoji.name} />
+              </button>         
+               </Grid>
+          )})}
+
+        </Grid>
 			</div>
     </div>
+    <style jsx>{`
+      h1 {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #filterButton:active {
+        background-color: white;
+      }`}
+    </style>
+    </>
   )
 }
 

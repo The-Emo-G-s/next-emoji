@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Carousel from './Carousel';
+import { getStaticProps } from "@/pages";
+import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react';
+
 
 const Navbar = () => {
   const [mode, setMode] = useState(() => {
@@ -161,6 +164,7 @@ return (
   		<div style={{ display: "flex", flexDirection: "column" }}>
         <button
 					id="mode-toggle"
+					title={`Switch to ${mode === "light" ? 'Dark' : 'Light'} mode?`}
           style={{
             background: "none",
             color: "#000000",
@@ -171,9 +175,8 @@ return (
             marginBottom: "1rem",
           }}
           onClick={toggleMode}
-					title={mode === "light" ? "Switch to Dark Mode?" : "Switch to Light Mode?"}
         >
-          {emoji}
+          {mode === "light" ? "🌑" : "☀️"}
         </button>
       </div>
       <span>

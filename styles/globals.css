@@ -41,6 +41,7 @@ body,
   --custom-panel-color: var(--custom-panel-color-dark);
   --custom-color: var(--custom-color-dark);
 }
+
 .light-mode {
   --custom-bg-color: var(--custom-bg-color-light);
   --custom-panel-color: var(--custom-panel-color-light);
@@ -433,31 +434,30 @@ button.primary,
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: large;
   align-items: center;
+  
 }
+
 .link-home{
   text-decoration: none;
   color: black;
-
-
-
 }
 
 .container-dept{
   display: flex;
   justify-content: space-between;
   margin: 5vw;
-
 }
+
 .right{
   flex: 50%;
 }
+
 .left{
   flex: 50%
 }
 
 .active-filter-button {
-  border-color: #24b47e;
-  border-width: 5px;
+  background-color: rgb(238, 238, 117);
 }
 
 #emoji-button {
@@ -470,6 +470,10 @@ button.primary,
   padding: 0;
   border: none;
   background: none;
+}
+
+#emoji-select:active {
+  border: 1px white solid;
 }
 
 a {
@@ -486,26 +490,26 @@ a {
 }
 
 .pointss:active {
-	animation: heartBeat; /* referring directly to the animation's @keyframe declaration */
-	animation-duration: 0.5s; /* don't forget to set a duration! */
+    animation: heartBeat; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 0.5s; /* don't forget to set a duration! */
 }
 
 .pointss {
-	background: none;
-	border: none;
+    background: none;
+    border: none;
 }
 
 .animoji {
-  height: 600px;
+    height: 600px;
 }
 
 .animojiz:active {
-  border: 1px white solid;
+    border: 1px white solid;
 }
 
 .username-title {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .username-img {
