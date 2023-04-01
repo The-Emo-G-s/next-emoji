@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react';
 import 'animate.css';
 import JSConfetti from 'js-confetti'
+import Stack from '@mui/material/Stack';
 
 export default function Clicker ({session}) {
   const jsConfetti = new JSConfetti()
@@ -59,7 +60,9 @@ export default function Clicker ({session}) {
       setLoading(false)
     }
   }
-
+  function resetGame() {
+	setPoints(0);
+  }
 
   async function updateGame({ points }) {
 		try {
@@ -106,20 +109,26 @@ export default function Clicker ({session}) {
 		<div>
 			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/'
 				? <>
-						<h1>Click Away{username && `, ${username}`}!</h1>
-     		 		<p>Points: {points.toLocaleString("en-US")}</p>
+						<h1 className='title-'>Click Away{username && `, ${username}`}!</h1>
+     		 		<p className='title-'>Points: {points.toLocaleString("en-US")}</p>
               <br></br>
+			  		<div className='emoji'>
 						<button
-								id='emoji-button'
 								className='pointss'
 								onClick={() => updateGame({points})}
 								disabled={loading}>
-									<img
+									<img className="animoji"
 										src={avatar_url}/>
 						</button>
+					</div>
 						<br></br>
+						<Stack
+							direction="row"
+							spacing={3}
+							justifyContent='center'>
 						<button onClick={() => save({points})}> 🛟 Save</button>
-							<button style={{backgroundColor:"firebrick"}}onClick={() => resetGame(points)}>Reset Points</button>
+						<button style={{backgroundColor:"firebrick"}}onClick={() => resetGame(points)}>Reset Points</button>
+						</Stack>
 							{/* <button onClick={() => auto({points})}> 🚀 Activate Boost</button> */}
 						<h2>🚀 Boosts:</h2>
 						<div className='boost-container'>
@@ -133,13 +142,9 @@ export default function Clicker ({session}) {
 												<h3>You've unlocked a Boost! Activate to make every click worth {power + 1} points!</h3>
 												<button
 													className='boost-button'
-													onClick={(event)=> {
-                            jsConfetti.addConfetti({
-                              emojis: ['🎉', '🎊', '🥳'],
-                           })
-														console.log(event.target)
-														activateBoost(power)
-													}}
+													onClick={(event)=> {jsConfetti.addConfetti({emojis: ['🎉', '🎊', '🥳'],})
+													console.log(event.target)
+													activateBoost(power)}}
 													>Activate</button>
 											</div>
 										)
@@ -148,6 +153,14 @@ export default function Clicker ({session}) {
 							: null
 						}
 						</div>
+						<style jsx>
+							{`
+							.emoji {
+								display: flex;
+								justify-content: center;
+							}
+							`}
+						</style>
 					</>
 				: <div>
 						<h1>Head to the ACCOUNT link above to set your ANIMOJI, then come back to start clicking!!!!</h1>

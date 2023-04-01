@@ -71,28 +71,7 @@ function Avatar({ uid, url, size, onUpload, data }) {
         <label className="button primary block" htmlFor="single">
           {uploading ? 'Uploading ...' : 'Upload'}
         </label>
-				<select
-					onChange={uploadAvatar}
-				>
-				{/* {data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
-					return (
-						<option key={`memoji-${emoji.name}`} value={emoji.id}>
-							<img className='mini-img' src={emoji.imageUrl} alt={emoji.name} />
-						</option>
-					)
-				})} */}
-				<option value="https://em-content.zobj.net/thumbs/120/apple/354/bear_1f43b.png">🐻</option>
-				<option value="https://em-content.zobj.net/thumbs/120/google/350/bear_1f43b.png">🐻‍❄️</option>
-				<option value="https://em-content.zobj.net/thumbs/120/microsoft/319/bear_1f43b.png">🧸</option>
-				<option value="https://em-content.zobj.net/thumbs/120/twitter/322/bear_1f43b.png">🐼</option>
-			</select>
-        {/* <select
-          type="file"
-          id="single"
-          accept="image/*"
-          onChange={uploadAvatar}
-          disabled={uploading}
-        /> */}
+				<select onChange={uploadAvatar}></select>
       </div>
     </div>
   )
