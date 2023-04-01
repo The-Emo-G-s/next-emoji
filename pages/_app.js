@@ -6,13 +6,8 @@ import Navbar from '@/components/ NavBar'
 
 function MyApp({ Component, pageProps }) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
-  const [mode, setMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('mode') || 'light'
-    }
-    return 'light'
-  })
-
+  const [mode, setMode] = useState('');
+		
   useEffect(() => {
     if (mode === 'light') {
       document.body.style.backgroundColor = '#ffffff'
