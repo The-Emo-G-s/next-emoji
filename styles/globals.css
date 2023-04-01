@@ -515,4 +515,6 @@ a {
 #carousel-pic {
 	height: 35px;
 	bottom: 0;
+	vertical-align: middle;
+	margin-bottom: 5px;
 }
