@@ -24,7 +24,7 @@ const Navbar = () => {
     setMode(mode === "light" ? "dark" : "light");
   };
 
-  const emoji = mode === "light" ? "☀️" : "🌙";
+  // const emoji = mode === "light" ? "☀️" : "🌙";
 
   
   return (
@@ -42,7 +42,7 @@ const Navbar = () => {
           }}
           onClick={toggleMode}
         >
-          {emoji}
+          {/* {emoji} */}
         </button>
       </div>
       <span>
