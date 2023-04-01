@@ -67,7 +67,6 @@ export default function Clicker ({session}) {
 			points = points + (1 * clickMultiplier);
       		setPoints(points);
 			setPowerOf10(Math.floor(Math.log10(points)));
-			console.log("points are", points, "powerOf10 is", powerOf10)
 			if(powerOf10 > 0 && !arrOfBoosts.includes(powerOf10)) {
 				setArrOfBoosts([...arrOfBoosts, powerOf10])
 			}
@@ -77,8 +76,6 @@ export default function Clicker ({session}) {
 		} finally {
 			setLoading(false)
 		}
-		console.log("The Boosts array is:");
-		console.log(arrOfBoosts)
 	}
 
 
