@@ -30,12 +30,6 @@ const Navbar = () => {
 
   // const emoji = mode === "light" ? "☀️" : "🌙";
 
-  
-  	// const containerStyles = {
-		// 	backgroundImage: "url('https://em-content.zobj.net/thumbs/72/google/350/bear_1f43b.png')",
-		// 	width: '500px',
-		// 	height: '280px',
-		// }
 		const oLike = [
 			{
 				emoji: "🐻",
@@ -169,6 +163,8 @@ return (
     <div className="container-nav">
   		<div style={{ display: "flex", flexDirection: "column" }}>
         <button
+					id="mode-toggle"
+					title={`Switch to ${mode === "light" ? 'Dark' : 'Light'} mode?`}
           style={{
             background: "none",
             color: "#000000",
@@ -180,7 +176,7 @@ return (
           }}
           onClick={toggleMode}
         >
-          {/* {emoji} */}
+          {mode === "light" ? "🌑" : "☀️"}
         </button>
       </div>
       <span>

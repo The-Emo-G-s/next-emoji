@@ -555,3 +555,16 @@ a {
 	vertical-align: middle;
 	margin-bottom: 5px;
 }
+
+#mode-toggle:hover::after {
+	content: attr(title);
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 0.5em;
+	background-color: yellow;
+	border-radius: 0.5em;
+	white-space: nowrap;
+	z-index: 1;
+}

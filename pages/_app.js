@@ -4,7 +4,7 @@ import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import '../styles/globals.css'
 import Navbar from '@/components/ NavBar'
 
-function MyApp({ Component, pageProps, animojis }) {
+function MyApp({ Component, pageProps }) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
 
 
@@ -12,7 +12,6 @@ function MyApp({ Component, pageProps, animojis }) {
     <SessionContextProvider
       supabaseClient={supabase}
       initialSession={pageProps.initialSession}>
-
         <Navbar/>
         <Component {...pageProps} />
     </SessionContextProvider>
