@@ -33,20 +33,10 @@ function Carousel ({ animojis }){
 	}, [])
 	
   return (
-		<span>
-			{/* <span style={emojiStyles}></span> */}
-			<img styles={{height: "50%"}} src={animojis[displayIndex].url} />
-		</span>
+		<>
+			<img id='carousel-pic' src={animojis[displayIndex].url} />
+		</>
   )
 }
-// export async function getServerSideProps() {
-	//   let { data } = await supabase.from('animojis').select()
-	
-//   return {
-//     props: {
-//      turtlepuff: data
-//     },
-//   }
-// }
 
 export default Carousel

@@ -456,12 +456,10 @@ button.primary,
   align-items: center;
   
 }
+
 .link-home{
   text-decoration: none;
   color: black;
-
-
-
 }
 
 
@@ -469,11 +467,12 @@ button.primary,
   display: flex;
   justify-content: space-between;
   margin: 5vw;
-
 }
+
 .right{
   flex: 50%;
 }
+
 .left{
   flex: 50%
 }
@@ -506,10 +505,14 @@ a {
 
 .form-widget {
 	background: none;
-	}
+}
 
-.pointss:active {
-  
+.pointss:active {  
     animation: heartBeat; /* referring directly to the animation's @keyframe declaration */
     animation-duration: 0.5s; /* don't forget to set a duration! */
-  }
+}
+
+#carousel-pic {
+	height: 35px;
+	bottom: 0;
+}
