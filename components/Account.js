@@ -137,7 +137,7 @@ async function getCurrentUser() {
       </div>
 			<div className='store'>
 				<h1 className='title-'>Which ANIMOJI are you??</h1>
-				<div className='sort-menu'>Sort by:
+				<div className='sort-menu'>
 
 					<p>
 						<button
