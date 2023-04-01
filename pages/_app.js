@@ -4,7 +4,7 @@ import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import '../styles/globals.css'
 import Navbar from '@/components/ NavBar'
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, animojis }) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
   const [mode, setMode] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }) {
         >
           Swap Color Theme
         </button>
-        <Navbar/>
+        <Navbar />
         <Component {...pageProps} />
       </div>
     </SessionContextProvider>

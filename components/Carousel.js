@@ -3,15 +3,19 @@ import Navbar from '@/components/ NavBar';
 import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react';
 
 function Carousel ({ animojis }){
-	const [displayIndex, setDisplayIndex] = useState(0);
 	const [list, setList] = useState(animojis);
+	const [displayIndex, setDisplayIndex] = useState(0);
+	// let displayIndex = 0;
 
-	const nextEmoji = (idx)=> {
+	const nextEmoji = ()=> {
 		const isLast = displayIndex === animojis.length - 1;
 		const nextIndex = isLast ? 0 : displayIndex + 1;
 		setDisplayIndex(nextIndex);
+		// displayIndex = nextIndex;
 	}
 
+	setInterval(nextEmoji, 10000);
+	clearInterval(nextEmoji);
 	// const sliderStyles = {
 	// 	height: 100%,
 	// 	position: relative
@@ -23,13 +27,13 @@ function Carousel ({ animojis }){
 	// 	position: relative
 	// }
 
-	// useEffect
-	setInterval(nextEmoji, 1365);
+	useEffect(()=> {
+	})
 
   return (
-		<div>
-			<div>{animojis[displayIndex].emoji}</div>
-		</div>
+		<span>
+			<span>{animojis[displayIndex].emoji}</span>
+		</span>
   )
 }
 // export async function getServerSideProps() {
