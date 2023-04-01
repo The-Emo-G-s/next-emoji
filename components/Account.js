@@ -135,27 +135,32 @@ async function getCurrentUser() {
 					<p>
           <div className='buttons'>
           <Stack direction="row" spacing={2}> 
-						<button 
+						<button
+              id='filerButton' 
 							className={isFilteredBy === 'earth' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("earth")}} >
 								🪨 EARTH 🪨
 						</button>
 						<button 
+              id='filerButton'
 							className={isFilteredBy === 'fire' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("fire")}} >
 								🔥 FIRE 🔥
 						</button>
 						<button 
+              id='filerButton'
 							className={isFilteredBy === 'wind' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("wind")}} >
 								🌬 WIND 🌬
 						</button>
 						<button 
+              id='filerButton'
 							className={isFilteredBy === 'water' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("water")}} >
 								🌊 WATER 🌊
 						</button>
 						<button 
+              id='filerButton'
 							className={isFilteredBy === 'heart' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("heart")}} >
 								💝 HEART 💝
@@ -185,6 +190,10 @@ async function getCurrentUser() {
       h1 {
         display: flex;
         justify-content: center;
+      }
+      
+      #filterButton:active {
+        background-color: white;
       }`}
     </style>
     </>

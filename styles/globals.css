@@ -43,6 +43,7 @@ body,
   --custom-color: var(--custom-color-dark);
 }
 
+
 .light-mode {
   --custom-bg-color: var(--custom-bg-color-light);
   --custom-panel-color: var(--custom-panel-color-light);
@@ -479,8 +480,7 @@ button.primary,
 }
 
 .active-filter-button {
-  border-color: #24b47e;
-  border-width: 5px;
+  background-color: rgb(238, 238, 117);
 }
 
 #emoji-button {
