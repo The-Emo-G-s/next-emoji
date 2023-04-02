@@ -6,12 +6,7 @@ import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react';
 
 
 const Navbar = () => {
-  const [mode, setMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("mode") || "light";
-    }
-    return "light";
-  });
+  const [mode, setMode] = useState('');
 
   useEffect(() => {
     if (mode === "light") {
@@ -27,8 +22,6 @@ const Navbar = () => {
   const toggleMode = () => {
     setMode(mode === "light" ? "dark" : "light");
   };
-
-  const emoji = mode === "light" ? "🌙" : "☀️";
 
 	const oLike = [
 		{

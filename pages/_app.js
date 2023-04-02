@@ -5,23 +5,7 @@ import '../styles/globals.css'
 import Navbar from '@/components/ NavBar'
 
 function MyApp({ Component, pageProps }) {
-  const [supabase] = useState(() => createBrowserSupabaseClient())
-  const [mode, setMode] = useState('');
-		
-  useEffect(() => {
-    if (mode === 'light') {
-      document.body.style.backgroundColor = '#ffffff'
-      document.body.style.color = '#000000'
-    } else {
-      document.body.style.backgroundColor = '#1c1c1c'
-      document.body.style.color = '#ffffff'
-    }
-    localStorage.setItem('mode', mode)
-  }, [mode])
-
-  const toggleMode = () => {
-    setMode(mode === 'light' ? 'dark' : 'light')
-  }
+  const [supabase] = useState(() => createBrowserSupabaseClient());
 
   return (
     <SessionContextProvider
