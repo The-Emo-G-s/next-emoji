@@ -9,7 +9,7 @@ body {
   --custom-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.8);
   --custom-color-dark: #fff;
   --custom-color-light: #333;
-  --custom-color-brand: #24b47e;
+  --custom-color-brand: #008080;
   --custom-color-secondary: #666;
   --custom-border: 1px solid #333;
   --custom-border-radius: 5px;
@@ -451,7 +451,7 @@ button.primary,
   display: flex;
   justify-content: center;
   height: 8vw;
-  background-color:#24b47e;
+  background-color:#008080;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: large;
   align-items: center;
@@ -496,7 +496,7 @@ button.primary,
 }
 
 #emoji-select:active {
-  border: 1px white solid;
+  border: 1px #008080 solid;
 }
 
 a {
@@ -554,7 +554,7 @@ a {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #24b47e;
+    background-color: #008080;
   }
   
   .navbar-toggle {

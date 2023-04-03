@@ -98,7 +98,7 @@ async function getCurrentUser() {
     <>
     <div className="form-widget">
       <h1 className="username-title">Welcome{username && ` back, ${username}`}!</h1>
-			{url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' && <img className='username-img' src={url} />}
+			<div id = 'avatar'>{url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/' && <img className='username-img' src={url} />}</div>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -194,6 +194,11 @@ async function getCurrentUser() {
       
       #filterButton:active {
         background-color: white;
+      }
+      
+      #avatar {
+        display: flex;
+        justify-content: center;
       }`}
     </style>
     </>
