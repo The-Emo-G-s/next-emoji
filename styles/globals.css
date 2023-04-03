@@ -576,3 +576,78 @@ a {
     height: 18px;
   }
 
+/* NAV BAR HAMBURGER */
+
+  #links.active{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: flex-start;
+    position: fixed;
+    top: 90px;
+    right: -300px;
+    width: 200px;
+    height: 100vh;
+    background-color:#008080;
+    box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+    padding: 40px 0 0 10px;
+
+}
+
+#links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position:absolute;
+    top: 136px;
+    right: 0px;
+    width: 200px;
+    height: 100vh;
+    background-color:#008080;
+    box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+    padding: 40px 0 0 10px;
+
+}
+
+#links li {
+    margin-bottom: 25px;
+}
+
+#links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+#links li {
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
+}
+
+#links li a{
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: cadetblue;
+  transition: 0.2s ease-in-out;
+}
+
+#links li a:hover,
+#links li a.active{
+  color:aquamarine;
+}
+
+#links li a:hover::after,
+#links li a.active::after{
+  content:'';
+  width: 75%;
+  height: 2px;
+  background-color: aquamarine;
+  position: absolute;
+  bottom: -4px;
+  left: 20px;
+
+}

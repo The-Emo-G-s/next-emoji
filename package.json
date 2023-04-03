@@ -18,6 +18,7 @@
     "@supabase/supabase-js": "^2.12.1",
     "animate.css": "^4.1.1",
     "eslint": "8.36.0",
+    "hamburger-react": "^2.5.0",
     "js-confetti": "^0.11.0",
     "next": "13.2.4",
     "only": "^0.0.2",

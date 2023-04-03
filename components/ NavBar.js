@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Carousel from './Carousel';
+import { Spin as Hamburger } from 'hamburger-react'
+import { supabase } from '../utils/supabaseClient';
 
 
 const Navbar = () => {
+  const [isOpen, setOpen] = useState(false)
   const [mode, setMode] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("mode") || "light";
@@ -181,6 +184,25 @@ const Navbar = () => {
           CLICKER KINGD<span><Carousel animojis={oLike}/></span>M
           </h1>
         </Link>
+        <div className="mobilePhone">
+          <ul id='links'
+              className={isOpen ? 
+              '#links' : '#links active'}>
+          <li><Link href='/account'>ACCOUNT</Link></li>
+          <li><Link href='/'>MY GAME</Link></li>
+          <li><Link href='/leaderboard'>LEADERBOARD</Link></li>
+          </ul>
+        <Hamburger 
+                className='mobile'
+                toggled={isOpen} 
+                toggle={setOpen}
+                direction='right'
+                color='white'
+                duration={0.8}
+                size={50}
+                rounded
+                 />
+        </div>
       </div>
     </nav>
   );
