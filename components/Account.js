@@ -136,32 +136,32 @@ async function getCurrentUser() {
 				<div className='sort-menu'>
 					<p>
           <div className='buttons'>
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2}> 
 						<button
-              id='filerButton'
+              id='filerButton' 
 							className={isFilteredBy === 'earth' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("earth")}} >
 								🪨 EARTH 🪨
 						</button>
-						<button
+						<button 
               id='filerButton'
 							className={isFilteredBy === 'fire' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("fire")}} >
 								🔥 FIRE 🔥
 						</button>
-						<button
+						<button 
               id='filerButton'
 							className={isFilteredBy === 'wind' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("wind")}} >
 								🌬 WIND 🌬
 						</button>
-						<button
+						<button 
               id='filerButton'
 							className={isFilteredBy === 'water' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("water")}} >
 								🌊 WATER 🌊
 						</button>
-						<button
+						<button 
               id='filerButton'
 							className={isFilteredBy === 'heart' ? 'active-filter-button' : 'filter-button'}
 							onClick={()=> {filterAnimojis("heart")}} >
@@ -172,7 +172,7 @@ async function getCurrentUser() {
 					</p>
 
 				</div>
-            <Grid container rowSpacing={6} columnSpacing={{ xs: 6}} wrap='wrap'>
+            <Grid container rowSpacing={6} columnSpacing={{ xs: 6}} wrap='wrap'>              
 				{data.sort((a,b) => a.name.localeCompare(b.name)).map((emoji) => {
 					return (
             <Grid xs={3} wrap='wrap'>
@@ -181,7 +181,7 @@ async function getCurrentUser() {
                 onClick={(event)=> {
                   setUrl(event.target.src)}}>
                 <img src={emoji.imageUrl} alt={emoji.name} />
-              </button>
+              </button>         
                </Grid>
           )})}
 
@@ -193,11 +193,11 @@ async function getCurrentUser() {
         display: flex;
         justify-content: center;
       }
-
+      
       #filterButton:active {
         background-color: white;
       }
-
+      
       #avatar {
         display: flex;
         justify-content: center;

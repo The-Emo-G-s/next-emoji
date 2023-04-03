@@ -184,6 +184,7 @@ const Navbar = () => {
           CLICKER KINGD<span><Carousel animojis={oLike}/></span>M
           </h1>
         </Link>
+        </div>
         <div className="mobilePhone">
           <ul id='links'
               className={isOpen ? 
@@ -202,7 +203,6 @@ const Navbar = () => {
                 size={50}
                 rounded
                  />
-        </div>
       </div>
     </nav>
   );
