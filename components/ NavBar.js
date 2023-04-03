@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import Carousel from './Carousel';
 import { Spin as Hamburger } from 'hamburger-react'
 import { supabase } from '../utils/supabaseClient';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 
-
-const Navbar = () => {
+const Navbar = ({ session }) => {
+  const supabase = useSupabaseClient()
+  const user = useUser()
   const [isOpen, setOpen] = useState(false)
   const [mode, setMode] = useState(() => {
     if (typeof window !== "undefined") {
@@ -192,6 +194,9 @@ const Navbar = () => {
           <li><Link href='/account'>ACCOUNT</Link></li>
           <li><Link href='/'>MY GAME</Link></li>
           <li><Link href='/leaderboard'>LEADERBOARD</Link></li>
+          <li><button onClick={() => supabase.auth.signOut()}>
+          Sign Out
+        </button></li>
           </ul>
         <Hamburger 
                 className='mobile'

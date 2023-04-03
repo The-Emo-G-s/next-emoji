@@ -125,9 +125,9 @@ async function getCurrentUser() {
       </div>
 
       <div>
-        <button className="button primary block" onClick={() => supabase.auth.signOut()}>
+        {/* <button className="button primary block" onClick={() => supabase.auth.signOut()}>
           Sign Out
-        </button>
+        </button> */}
       </div>
 			<div className='store'>
 				<h1>Choose a category below to find your ANIMOJI!</h1>
