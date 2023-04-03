@@ -150,7 +150,6 @@ function Leaderboard () {
 
     return (
       <div className='leaderboard'>
-      <h1>LEADERBOARD</h1>
       <table>
           <thead>
               <tr>

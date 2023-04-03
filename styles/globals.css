@@ -523,7 +523,7 @@ a {
   }
 
   .animoji {
-    height: 600px;
+    height: 40vw;
   }
 
   .animojiz:active {
@@ -641,8 +641,7 @@ a {
 }
 
 #links li a:hover::after,
-#links li a.active::after,
-#signOut a.active::after{
+#links li a.active::after{
   content:'';
   width: 75%;
   height: 2px;
@@ -650,5 +649,34 @@ a {
   position: absolute;
   bottom: -4px;
   left: 20px;
+}
 
+#signOut {
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: cadetblue;
+  transition: 0.2s ease-in-out;
+  border: none;
+}
+
+#signOut:hover,
+#signOut.active {
+  color:aquamarine;
+}
+
+#signOut:hover:after,
+#signOut.active.after {
+  content:'';
+  width: 75%;
+  height: 2px;
+  background-color: aquamarine;
+  position: absolute;
+  bottom: 3px;
+  left: 20px;
+}
+
+.leaderboard {
+  display: flex;
+  justify-content: center;
 }

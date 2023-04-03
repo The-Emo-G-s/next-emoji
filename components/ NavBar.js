@@ -194,7 +194,7 @@ const Navbar = ({ session }) => {
           <li><Link href='/account'>ACCOUNT</Link></li>
           <li><Link href='/'>MY GAME</Link></li>
           <li><Link href='/leaderboard'>LEADERBOARD</Link></li>
-          <li><button onClick={() => supabase.auth.signOut()}>
+          <li><button id='signOut' onClick={() => supabase.auth.signOut()}>
           Sign Out
         </button></li>
           </ul>
