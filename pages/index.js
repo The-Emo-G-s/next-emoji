@@ -23,12 +23,7 @@ const Home = () => {
         {/* <button className="button block">
         <Link href='/click2'>Your Game </Link>
         </button> */}
-        <Link href='/account'>
-				<button className="button block">Account</button>
-        </Link>
-        <Link href='/leaderboard'>
-				<button className="button block">LeaderBoard</button>
-        </Link>
+       
         <Clicker/>
         </>
       )}
