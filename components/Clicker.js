@@ -130,7 +130,7 @@ export default function Clicker ({session}) {
 							direction="row"
 							spacing={3}
 							justifyContent='center'>
-						<button onClick={(event) => {jsConfetti.addConfetti({emojis: [':floppy_disk:'],}) && save({points})}}> 🛟 Save</button>
+						<button onClick={(event) => {jsConfetti.addConfetti({emojis: ['💾'],}) && save({points})}}> 🛟 Save</button>
 						<button style={{backgroundColor:"firebrick"}}onClick={() => resetGame(points)}>Reset Points</button>
 						</Stack>
 							{/* <button onClick={() => auto({points})}> 🚀 Activate Boost</button> */}
