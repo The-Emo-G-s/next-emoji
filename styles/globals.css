@@ -556,11 +556,11 @@ a {
     padding: 1rem;
     background-color: #008080;
   }
-  
+
   .navbar-toggle {
     margin-right: 1rem;
   }
-  
+
   .navbar-center {
     flex-grow: 1;
     text-align: center;
@@ -572,3 +572,7 @@ a {
     vertical-align: middle;
     margin-bottom: 5px;
   }
+  .lead-img{
+    height: 18px;
+  }
+

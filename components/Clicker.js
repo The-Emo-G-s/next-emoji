@@ -113,6 +113,7 @@ export default function Clicker ({session}) {
 		<div>
 			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/'
 				? <>
+
 						<h1 className='title-'>Click Away{username && `, ${username}`}!</h1>
      		 		<p className='title-'>Points: {points.toLocaleString("en-US")}</p>
               <br></br>
