@@ -13,7 +13,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (mode === "light") {
-      document.body.style.backgroundColor = "#ffffff";
+      document.body.style.backgroundColor = "#FAF9F6";
       document.body.style.color = "#000000";
     } else {
       document.body.style.backgroundColor = "#1c1c1c";

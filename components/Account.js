@@ -19,7 +19,7 @@ function Account({ session, animojis }) {
 
 	const filterAnimojis = (value)=> {
 		if (isFilteredBy === value) {
-			setData(animojis);
+			setData(animojis.filter(emoji => emoji.department === ''));
 			setIsFilteredBy('');
 		} else {
 			setIsFilteredBy(value);
@@ -30,6 +30,7 @@ function Account({ session, animojis }) {
 
   useEffect(() => {
 		getProfile();
+		filterAnimojis();
   }, [session])
 
 async function getCurrentUser() {
@@ -130,7 +131,7 @@ async function getCurrentUser() {
 				<Link className="button primary block" href='/'>My Clicker Game!</Link>
       </div>
 			<div className='store'>
-				<h1>Which ANIMOJI are you??</h1>
+				<h1>Choose a category below to find your ANIMOJI!</h1>
 				<div className='sort-menu'>
 					<p>
           <div className='buttons'>
