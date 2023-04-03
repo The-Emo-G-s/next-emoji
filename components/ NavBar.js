@@ -24,38 +24,34 @@ const Navbar = () => {
     setMode(mode === "light" ? "dark" : "light");
   };
 
-  // const emoji = mode === "light" ? "☀️" : "🌙";
+  const emoji = mode === "light" ? "☀️" : "🌙";
 
-  
   return (
-    <div className="container-nav">
-      <div style={{ display: "flex", flexDirection: "column" }}>
+    <nav className="navbar">
+      <div className="navbar-toggle">
         <button
+          suppressHydrationWarning
           style={{
             background: "none",
             color: "#000000",
             border: "none",
             padding: "0.5rem",
             borderRadius: "0.5rem",
-            alignSelf: "flex-left",
-            marginBottom: "1rem",
           }}
           onClick={toggleMode}
         >
-          {/* {emoji} */}
+          {emoji}
         </button>
       </div>
-      <span>
+      <div className="navbar-center">
         <Link href="/" className="link-home">
           <h1>
             CLICKER KINGD<span>O</span>M
           </h1>
         </Link>
-      </span>
-    </div>
+      </div>
+    </nav>
   );
 };
 
 export default Navbar;
-
-
