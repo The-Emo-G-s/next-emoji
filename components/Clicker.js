@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { AuthContext } from '../contexts/auth';
 import {  useUser, useSupabaseClient  } from '@supabase/auth-helpers-react';
 import 'animate.css';
 import JSConfetti from 'js-confetti'
@@ -10,14 +9,12 @@ export default function Clicker ({session}) {
   const supabase = useSupabaseClient()
   const user = useUser()
   const [points, setPoints] = useState(0);
-	const [levelUps, setLevelUps] = useState(0);
   const [username, setUsername] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [loading, setLoading] = useState(true);
-	const [arrOfBoosts, setArrOfBoosts] = useState([]);
+  const [activated, setActivated] = useState(false);
   const [clickMultiplier, setClickMultiplier] = useState(1);
   const [powerOf10, setPowerOf10] = useState(0);
-
 
   useEffect(() => {
     getGame()
@@ -53,6 +50,7 @@ export default function Clicker ({session}) {
         setUsername(data.username);
         setAvatarUrl(data.avatar_url);
         setPoints(data.points);
+				setPowerOf10(Math.floor(Math.log10(data.points)));
       }
     } catch (error) {
       alert('Error loading user data!')
@@ -61,19 +59,21 @@ export default function Clicker ({session}) {
       setLoading(false)
     }
   }
-  function resetGame() {
-	setPoints(0);
-  }
+
+  // function resetGame() {
+	// 	setPoints(0);
+	// 	setActivated(false);
+	// 	setPowerOf10(0);
+  // }
 
   async function updateGame({ points }) {
 		try {
 			setLoading(true)
 			points = points + (1 * clickMultiplier);
-      		setPoints(points);
-			setPowerOf10(Math.floor(Math.log10(points)));
-			console.log("points are", points, "powerOf10 is", powerOf10)
-			if(powerOf10 > 0 && !arrOfBoosts.includes(powerOf10)) {
-				setArrOfBoosts([...arrOfBoosts, powerOf10])
+      setPoints(points);
+			if(powerOf10 < Math.floor(Math.log10(points))) {
+				setPowerOf10(Math.floor(Math.log10(points)));
+				setActivated(false);
 			}
 		} catch (error) {
 			alert('Error updating the data!')
@@ -81,8 +81,6 @@ export default function Clicker ({session}) {
 		} finally {
 			setLoading(false)
 		}
-		console.log("The Boosts array is:");
-		console.log(arrOfBoosts)
 	}
 
 
@@ -104,16 +102,15 @@ export default function Clicker ({session}) {
 		}
 	}
 
-	const activateBoost = (power)=> {
-		// usedBoost[power] = true;
-		setClickMultiplier(power+1)
+	const activateBoost = ()=> {
+		setActivated(true);
+		setClickMultiplier(powerOf10+1);
 	}
 
 	return (
 		<div>
 			{avatar_url?.slice(0, 35)==='https://em-content.zobj.net/thumbs/'
 				? <>
-
 						<h1 className='title-'>Click Away{username && `, ${username}`}!</h1>
      		 		<p className='title-'>Points: {points.toLocaleString("en-US")}</p>
               <br></br>
@@ -132,28 +129,24 @@ export default function Clicker ({session}) {
 							spacing={3}
 							justifyContent='center'>
 						<button onClick={(event) => {jsConfetti.addConfetti({emojis: ['💾'],}) && save({points})}}> 🛟 Save</button>
-						<button style={{backgroundColor:"firebrick"}}onClick={() => resetGame(points)}>Reset Points</button>
+						{/* <button style={{backgroundColor:"firebrick"}} onClick={() => resetGame(points)}>Reset Points</button> */}
 						</Stack>
-							{/* <button onClick={() => auto({points})}> 🚀 Activate Boost</button> */}
+     		 		<p className='title-'>Points per click: {clickMultiplier}</p>
 						<h2>🚀 Boosts:</h2>
 						<div className='boost-container'>
-							{arrOfBoosts.length
+							{powerOf10 >= 1
 							?
 							<>
-									Horray, you've unlocked a boost! You're next boost comes after {Math.pow(10, arrOfBoosts[arrOfBoosts.length - 1] + 1).toLocaleString("en-US")} - keep clicking!!
-									{arrOfBoosts?.map((power)=> {
-										return(
-											<div key={`boost-${power}`} className='boost-bar' style={{borderColor:"white", borderWidth: "2px", borderStyle: "dotted"}}>
-												<h3>You've unlocked a Boost! Activate to make every click worth {power + 1} points!</h3>
+									You're next boost comes after {Math.pow(10, Math.floor(Math.log10(points)) + 1).toLocaleString("en-US")} - keep clicking!!
+											<div className='boost-bar' style={{borderColor:"white", borderWidth: "2px", borderStyle: "dotted"}}>
+												<h3>{!activated && `Horray, you've unlocked a boost! Activate to make every click worth ${powerOf10 + 1} points!`}</h3>
 												<button
-													className='boost-button'
-													onClick={(event)=> {jsConfetti.addConfetti({emojis: ['🎉', '🎊', '🥳'],})
-													console.log(event.target)
-													activateBoost(power)}}
-													>Activate</button>
+													className={`boost-button${activated ? '-activated' : null}`}
+													onClick={(event)=> {
+														jsConfetti.addConfetti({emojis: ['🎉', '🎊', '🥳'],})
+														activateBoost()}}
+													>{activated ? '🎉 🎊 🥳 🎊 🎉' : 'Activate'}</button>
 											</div>
-										)
-									})}
 								</>
 							: null
 						}
@@ -175,49 +168,3 @@ export default function Clicker ({session}) {
     </div>
   );
 }
-
-
-// if(points > 1 && Math.floor(Math.log10(points)) === Math.floor(Math.log10(points - 1)) + 1) {
-// 	console.log('leveling up')
-// 	setArrOfBoosts([...arrOfBoosts, levelUps + 1])
-// 	setLevelUps(Math.floor(Math.log10(points)));
-// }
-
-
-	// const updateBoosts = (points)=> {
-	// 	console.log('The updateBoosts function is running on', points, "points.")
-	// 	if(points > 1) {
-	// 		console.log("Points IS greater than 1, so we'll set the levelUps to be:");
-	// 		console.log(Math.floor(Math.log10(points)));
-	// 		levelUps = Math.floor(Math.log10(points))
-	// 		setLevelUps(levelUps);
-	// 	}
-	// 	// for(let i = 0; i < levelUps; i++) {
-	// 	// 	setArrOfBoosts([...arrOfBoosts, levelUps + 1]);
-	// 	// }
-	// }
-
-
-
-		// async function auto({points}) {
-	// 	const interval = setInterval(async()=> {
-	// 		try {
-	// 			setLoading(true)
-	// 			const interval = setInterval(async() => {
-	// 				setPoints((points) => points+ 1)
-	// 				const updates = {
-	// 					id: user.id,
-	// 					points: points,
-	// 					updated_at: new Date().toISOString(),
-	// 				}
-	// 				await supabase.from('profiles').upsert(updates)
-	// 				console.log('Good thing happened!')
-	// 			}, 1000)
-	// 		} catch (error) {
-	// 			alert('Error updating the data!')
-	// 			console.log(error)
-	// 		} finally {
-	// 			setLoading(false)
-	// 		}
-	// 	}, 1000)
-	// }
