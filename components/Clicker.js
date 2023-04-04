@@ -161,7 +161,7 @@ export default function Clicker ({session}) {
 						</style>
 					</>
 				: <div>
-						<h1>Head to the ACCOUNT link above to set your ANIMOJI, then come back to start clicking!!!!</h1>
+						<h1>Head to your ACCOUNT page to set your ANIMOJI, then come back to start clicking!!!!</h1>
 						{/* insert carousel for bored eyes */}
 					</div>
 			}
