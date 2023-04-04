@@ -15,6 +15,7 @@ export default function Clicker ({session}) {
   const [activated, setActivated] = useState(false);
   const [clickMultiplier, setClickMultiplier] = useState(1);
   const [powerOf10, setPowerOf10] = useState(0);
+  const [multiplesOf100, setMultiplesOf100] = useState(0);
 
   useEffect(() => {
     getGame()
@@ -60,19 +61,13 @@ export default function Clicker ({session}) {
     }
   }
 
-  // function resetGame() {
-	// 	setPoints(0);
-	// 	setActivated(false);
-	// 	setPowerOf10(0);
-  // }
-
   async function updateGame({ points }) {
 		try {
 			setLoading(true)
 			points = points + (1 * clickMultiplier);
       setPoints(points);
-			if(powerOf10 < Math.floor(Math.log10(points))) {
-				setPowerOf10(Math.floor(Math.log10(points)));
+			if(powerOf10 < Math.floor(points/100)) {
+				setPowerOf10(Math.floor(points/100));
 				setActivated(false);
 			}
 		} catch (error) {
@@ -137,7 +132,7 @@ export default function Clicker ({session}) {
 							{powerOf10 >= 1
 							?
 							<>
-									You're next boost comes after {Math.pow(10, Math.floor(Math.log10(points)) + 1).toLocaleString("en-US")} - keep clicking!!
+									You're next boost comes after {(100 * (Math.floor(points/100) + 1)).toLocaleString("en-US")} - keep clicking!!
 											<div className='boost-bar' style={{borderColor:"white", borderWidth: "2px", borderStyle: "dotted"}}>
 												<h3>{!activated && `Horray, you've unlocked a boost! Activate to make every click worth ${powerOf10 + 1} points!`}</h3>
 												<button
