@@ -99,6 +99,8 @@ export default function Clicker ({session}) {
 		setActivated(true);
 		if(powerOf10 === 3) {
 			setClickMultiplier(10 * (1 + powerOf10) ** 2);
+		} else if (powerOf10 >= 14) {
+			setClickMultiplier(clickMultiplier + 1365);
 		} else if (powerOf10 > 3) {
 			setClickMultiplier((10 ** (powerOf10 - 3) * (1 + powerOf10) ** 2) / (powerOf10 - 3));
 		} else {
@@ -129,14 +131,14 @@ export default function Clicker ({session}) {
 							justifyContent='center'>
 						<button onClick={(event) => {jsConfetti.addConfetti({emojis: ['💾'],}) && save({points})}}> 🛟 Save</button>
 						</Stack>
-     		 		<p className='title-'>Points per click: {clickMultiplier}</p>
+     		 		<p className='title-'>Points per click: {clickMultiplier.toLocaleString("en-US")}</p>
 						<h2>🚀 Boosts:</h2>
 						<div className='boost-container'>
 							{powerOf10 >= 1
 							?
 							<>
 									You're next boost comes after {(10 ** (1 + Math.floor(Math.log10(points)))).toLocaleString("en-US")} - keep clicking!!
-											<div className='boost-bar' style={{borderColor:"white", borderWidth: "2px", borderStyle: "dotted"}}>
+											<div className='boost-bar'>
 												<h3>{!activated && `Horray, you've unlocked a boost! Activate increase your points per click!`}</h3>
 												<button
 													className={`boost-button${activated ? '-activated' : null}`}
